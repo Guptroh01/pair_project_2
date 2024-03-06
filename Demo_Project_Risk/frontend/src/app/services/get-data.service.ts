@@ -15,6 +15,7 @@ export class GetDataService implements OnInit {
    
   }
 
+
   getAllRisks():Observable<any>{
     return this.http.get(this.url);
 
@@ -22,6 +23,7 @@ export class GetDataService implements OnInit {
   updateRisk(id:any){
 
   }
+
 
   createRisk(data: any): Observable<any>{
     const hazardsArray = Array.isArray(data.hazards) ? data.hazards : [data.hazards];
