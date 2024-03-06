@@ -1,5 +1,5 @@
 
-import { Component, ViewChild, AfterViewInit, Injectable, OnInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, Injectable, OnInit, ElementRef } from '@angular/core';
 import { Risk } from 'src/app/Risk';
 import { MatSort, Sort } from '@angular/material/sort';
 import { CdkDrag, CdkDragMove, CdkDragStart, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -10,6 +10,8 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import { Input } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { EditDeleteComponent } from '../edit-delete/edit-delete.component';
 
 const risksData: Risk[] = [
 
@@ -102,6 +104,24 @@ const risksData: Risk[] = [
 
 export class TableDisplayComponent implements OnInit, AfterViewInit {
 
+  constructor(public dialog: MatDialog, private elementRef: ElementRef){}
+
+  openDialog(): void{
+    const dialogRef = this.dialog.open(EditDeleteComponent, {
+      width: 'auto',
+      position: {
+        top: `${this.elementRef.nativeElement.offsetTop}px`,
+        right: `${this.elementRef.nativeElement.offsetRight}px`
+      }
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed!!');
+    })
+  }
+
+  logRow(row: any){
+    console.log(row.hazards);
+  }
   // dataSource = new MatTableDataSource(risks);
   risksArr !: Risk[]
   dataSource = new MatTableDataSource(risksData)
@@ -116,20 +136,13 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   //   })
   // }
 
-
-
-
-
-
   @ViewChild(MatSort) sort !: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit() {
-
     console.log(this.dataSource);
     // this.dataSource.sort= this.sort;
     // this.dataSource.paginator= this.paginator;
-
   }
 
   ngAfterViewInit() {
@@ -138,24 +151,13 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
 
   }
 
-
-
-
-
   displayedColumns: string[] = ['risk_id', 'risk_category', 'hazards', 'risks', 'mitigation_status', 'pre_mitigation_risk_score', 'post_mitigation_risk_score', 'barriers', 'update'];
 
 
-
   drop(event: CdkDragDrop<string[]>) {
-
-
     if (event.currentIndex === 0 || event.currentIndex === 1) {
       moveItemInArray(this.displayedColumns, event.previousIndex, event.previousIndex)
-
     }
-
-
-
     else {
       moveItemInArray(this.displayedColumns, event.previousIndex, event.currentIndex);
 

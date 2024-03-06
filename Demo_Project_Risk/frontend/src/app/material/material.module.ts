@@ -15,7 +15,6 @@ import { MatIconModule,MatIcon } from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSelectModule, matSelectAnimations } from '@angular/material/select';
 
-
 const MaterialUI = [
   MatButtonModule,
   MatToolbarModule,
