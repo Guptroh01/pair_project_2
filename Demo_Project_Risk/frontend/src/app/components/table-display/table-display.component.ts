@@ -12,7 +12,7 @@ import { Input } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDeleteComponent } from '../edit-delete/edit-delete.component';
-
+import { GetDataService } from 'src/app/services/get-data.service';
 const risksData: Risk[] = [
 
   {
@@ -29,7 +29,7 @@ const risksData: Risk[] = [
 
 
   {
-    risk_id: 1,
+    risk_id: 2,
     risk_category: 'Reserviour damage',
     hazards: ['abc'],
     risks: ['shutdown', 'leak'],
@@ -41,7 +41,7 @@ const risksData: Risk[] = [
   },
 
   {
-    risk_id: 1,
+    risk_id: 3,
     risk_category: 'Reserviour damage',
     hazards: ['abc'],
     risks: ['shutdown', 'leak'],
@@ -53,7 +53,7 @@ const risksData: Risk[] = [
   },
 
   {
-    risk_id: 1,
+    risk_id: 4,
     risk_category: 'Reserviour damage',
     hazards: ['abcabcabcabcabcabcabcabcabcabcabc'],
     risks: ['shutdown', 'leak'],
@@ -65,7 +65,7 @@ const risksData: Risk[] = [
   },
 
   {
-    risk_id: 1,
+    risk_id: 5,
     risk_category: 'Reserviour damage',
     hazards: ['abc'],
     risks: ['shutdown', 'leak'],
@@ -77,7 +77,7 @@ const risksData: Risk[] = [
   },
 
    {
-    risk_id: 1,
+    risk_id: 6,
     risk_category: 'Reserviour damage',
     hazards: ['abc'],
     risks: ['shutdown', 'leak'],
@@ -104,7 +104,7 @@ const risksData: Risk[] = [
 
 export class TableDisplayComponent implements OnInit, AfterViewInit {
 
-  constructor(public dialog: MatDialog, private elementRef: ElementRef){}
+  constructor(public dialog: MatDialog, private elementRef: ElementRef,private GetDataService:GetDataService ){}
 
   openDialog(): void{
     const dialogRef = this.dialog.open(EditDeleteComponent, {
@@ -124,7 +124,7 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   }
   // dataSource = new MatTableDataSource(risks);
   risksArr !: Risk[]
-  dataSource = new MatTableDataSource(risksData)
+  dataSource!: MatTableDataSource < Risk[] > ;
 
   // constructor(private ApiService:ApiServiceService){
 
@@ -141,6 +141,10 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     console.log(this.dataSource);
+    this.GetDataService.getAllRisks().subscribe((res)=>{
+      console.log(res);
+      this.dataSource = new MatTableDataSource(res);
+    })
     // this.dataSource.sort= this.sort;
     // this.dataSource.paginator= this.paginator;
   }
@@ -148,6 +152,11 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
+    this.GetDataService.getAllRisks().subscribe((res)=>{
+      console.log(res);
+      this.dataSource = new MatTableDataSource(res);
+    })
 
   }
 
