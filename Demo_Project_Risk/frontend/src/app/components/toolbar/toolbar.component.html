@@ -1,0 +1,18 @@
+<mat-toolbar class = "white-toolbar">
+    
+        <mat-select [value]="'filter1'" class="custom-select">
+            <mat-option value = "filter1"> Risks by ID</mat-option>
+            <mat-option value = "filter2"> Risks by Category</mat-option>
+            <mat-option value = "filter3"> Risks by Mitigation Score</mat-option>
+        </mat-select>
+    
+        <span class="spacer"></span>
+        <button mat-icon-button>
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+    <button mat-button color="warn" style="color: white; background-color: red;" (click)="openCreateRiskDialog()"> Add Risk </button>
+    
+</mat-toolbar>
+
+
+ 

@@ -1,0 +1,27 @@
+
+.custom-form-field{
+    padding: 5px;
+    width: 400px;
+   
+   
+}
+.custom-title{
+    text-align: center;
+    padding: 10px;
+}
+ 
+
+.center-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  position: relative;
+}
+ 
+.custom-dialog{
+    position: relative;
+    display: flex;
+   
+}
+ 

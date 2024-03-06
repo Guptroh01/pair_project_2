@@ -1,0 +1,10 @@
+.custom-select {
+  padding: 8px;
+  margin: 4px;
+  width: 220px;
+  font-weight: bold
+}
+
+.spacer{
+  flex: auto;
+}

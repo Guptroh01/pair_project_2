@@ -1,0 +1,73 @@
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8"
+matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)"
+>
+  <!-- Position Column -->
+  <ng-container matColumnDef="risk_id">
+    <mat-header-cell   *matHeaderCellDef mat-sort-header cdkDrag> Risk Id </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.risk_id}} </mat-cell>
+  </ng-container>
+ 
+  <!-- Name Column -->
+  <ng-container matColumnDef="risk_category">
+    <mat-header-cell *matHeaderCellDef  cdkDrag> Risk Category </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.risk_category}} </mat-cell>
+  </ng-container>
+ 
+  <!-- Weight Column -->
+  <ng-container matColumnDef="hazards">
+    <mat-header-cell *matHeaderCellDef cdkDrag><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Hazards </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.hazards}} </mat-cell>
+  </ng-container>
+ 
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="risks">
+    <mat-header-cell *matHeaderCellDef cdkDrag><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Risks </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.risks}} </mat-cell>
+  </ng-container>
+ 
+ 
+  <ng-container matColumnDef="mitigation_status">
+    <mat-header-cell *matHeaderCellDef cdkDrag><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Mitigation Status </mat-header-cell>
+    <mat-cell *matCellDef="let element" [ngSwitch]="element.mitigation_status">  <div *ngSwitchCase="false">Closed</div>
+      <div *ngSwitchCase="true">Open</div> </mat-cell>
+  </ng-container>
+ 
+ 
+ 
+  <ng-container matColumnDef="pre_mitigation_risk_score">
+    <mat-header-cell *matHeaderCellDef cdkDrag><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Pre MitigationScore </mat-header-cell>
+    <mat-cell *matCellDef="let element" [ngSwitch]="element.pre_mitigation_risk_score">
+      <span *ngSwitchCase="0" class ="mitigation_status"><mat-icon [ngStyle]="{'color':'#02A783'}">circle</mat-icon> Low </span>
+     <span *ngSwitchCase="1"><mat-icon [ngStyle]="{'color':'#F4DD33'}">circle</mat-icon> Medium </span>
+     <span *ngSwitchCase="2"><mat-icon [ngStyle]="{'color':'#CF2333'}">circle</mat-icon> High </span>
+    </mat-cell>
+  </ng-container>
+ 
+  <ng-container matColumnDef="post_mitigation_risk_score">
+    <mat-header-cell *matHeaderCellDef cdkDrag><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Post MitigationScore </mat-header-cell>
+    <mat-cell *matCellDef="let element" [ngSwitch]="element.post_mitigation_risk_score">
+      <span *ngSwitchCase="0" class ="mitigation_status"><mat-icon [ngStyle]="{'color':'#02A783'}">circle</mat-icon> Low </span>
+     <span *ngSwitchCase="1"><mat-icon [ngStyle]="{'color':'#F4DD33'}">circle</mat-icon> Medium </span>
+     <span *ngSwitchCase="2"><mat-icon [ngStyle]="{'color':'#CF2333'}">circle</mat-icon> High </span>
+   </mat-cell>
+  </ng-container>
+ 
+  <ng-container matColumnDef="barriers">
+    <mat-header-cell *matHeaderCellDef cdkDrag> <mat-icon cdkDragHandle > drag_indicator</mat-icon> Barriers </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.barriers}} </mat-cell>
+  </ng-container>
+ 
+  <ng-container matColumnDef="update">
+    <mat-header-cell *matHeaderCellDef> 
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> <mat-icon > more_horiz</mat-icon> </mat-cell>
+  </ng-container>
+ 
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+ 
+<mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons ></mat-paginator>
+ 
+ 
+ 
