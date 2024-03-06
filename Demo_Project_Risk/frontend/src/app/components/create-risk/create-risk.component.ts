@@ -35,6 +35,11 @@ interface Mitigation_Status{
   providers:[]
 })
 export class CreateRiskComponent implements OnInit{
+  isEditMode:boolean = false;
+  recordId:any;
+  createRiskForm!:FormGroup;
+
+
   mitigation_risk_scores: Mitigation_Risk_Score[] = [
     {value: 0, viewValue: 'Low'},
     {value: 1, viewValue: 'Medium'},
@@ -52,18 +57,32 @@ export class CreateRiskComponent implements OnInit{
   constructor(public dialogRef: MatDialogRef<CreateRiskComponent> ,private GetDataService :GetDataService) {}
 
   ngOnInit(): void {
+    this.initialiseForm();
+    
     
   }
 
-  createRiskForm = new FormGroup({
-    risk_category: new FormControl('',Validators.required),
-    hazards: new FormControl( '',Validators.required),
-    risks: new FormControl('',Validators.required),
-    mitigation_status: new FormControl('',Validators.required),
-    pre_mitigation_risk_score : new FormControl('',Validators.required),
-    post_mitigation_risk_score: new FormControl('',Validators.required),
-    barriers: new FormControl('',Validators.required)
-  });
+  initialiseForm():void{
+
+    this.createRiskForm = new FormGroup({
+      risk_category: new FormControl('',Validators.required),
+      hazards: new FormControl( '',Validators.required),
+      risks: new FormControl('',Validators.required),
+      mitigation_status: new FormControl('',Validators.required),
+      pre_mitigation_risk_score : new FormControl('',Validators.required),
+      post_mitigation_risk_score: new FormControl('',Validators.required),
+      barriers: new FormControl('',Validators.required)
+    });
+    // defining the form
+
+
+    if(this.isEditMode){
+      
+    }
+
+  }
+
+ 
 
 
   closeDialog(): void{
