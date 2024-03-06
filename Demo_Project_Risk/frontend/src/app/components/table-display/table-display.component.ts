@@ -12,6 +12,7 @@ import { Input } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDeleteComponent } from '../edit-delete/edit-delete.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 const risksData: Risk[] = [
 
@@ -77,14 +78,14 @@ const risksData: Risk[] = [
   },
 
    {
-    risk_id: 1,
+    risk_id: 2,
     risk_category: 'Reserviour damage',
     hazards: ['abc'],
     risks: ['shutdown', 'leak'],
     mitigation_status: false,
     pre_mitigation_risk_score: 2,
     post_mitigation_risk_score: 1,
-    barriers: ['water']
+    barriers: ['waterjhgfddf', 'wa', 'water2']
 
   },
 ]
