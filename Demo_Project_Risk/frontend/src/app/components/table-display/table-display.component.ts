@@ -141,8 +141,6 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    
- 
   }
 
   ngAfterViewInit() {

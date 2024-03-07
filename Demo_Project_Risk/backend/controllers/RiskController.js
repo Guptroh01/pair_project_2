@@ -11,6 +11,15 @@ class RiskController{
         }
     }
 
+    async getRiskById(req, res) {
+        const {id} = req.params;
+        try {
+            const risks = await RiskService.getRiskById(id);
+            res.json(risks);
+        } catch (error) {
+            res.status(500).json({error: error.message});
+        }
+    }
     async createRisk(req, res) {
         const riskData = req.body;
         try {
