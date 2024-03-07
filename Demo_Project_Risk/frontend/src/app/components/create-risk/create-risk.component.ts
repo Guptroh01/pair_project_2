@@ -10,6 +10,10 @@ import { MatOption } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import {GetDataService} from '../../services/get-data.service' 
 import {MatIconModule } from '@angular/material/icon';
+import { Risk } from 'src/app/Risk';
+// import { MatTableDataSource } from '@angular/material/table'
+
+// const risksData: Risk[] = [];
 
 interface Mitigation_Risk_Score{
   value: number;
@@ -58,9 +62,10 @@ export class CreateRiskComponent implements OnInit{
 
   ngOnInit(): void {
     this.initialiseForm();
-    
-    
   }
+
+  // risksArr !: Risk[]
+  // dataSource!: MatTableDataSource < Risk[] > ;
 
   initialiseForm():void{
 
@@ -76,15 +81,9 @@ export class CreateRiskComponent implements OnInit{
     // defining the form
 
 
-    if(this.isEditMode){
-      
+    if(this.isEditMode){ 
     }
-
   }
-
- 
-
-
   closeDialog(): void{
     this.dialogRef.close();
   }
@@ -99,6 +98,12 @@ export class CreateRiskComponent implements OnInit{
       console.log(err);
     })
     this.dialogRef.close(this.createRiskForm.value);
+
+
+    // this.GetDataService.getAllRisks().subscribe((res) => {
+    //   console.log(res);
+    //   this.dataSource.data = res;
+    // });
   }
 
   createRisk() {

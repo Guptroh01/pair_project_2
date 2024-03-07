@@ -14,6 +14,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditDeleteComponent } from '../edit-delete/edit-delete.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { GetDataService } from 'src/app/services/get-data.service';
+import { MatChipInput } from '@angular/material/chips';
+// import { COMMA, ENTER } from '@angular/cdk/keycodes'
 
 const risksData: Risk[] = [
 
@@ -95,14 +97,7 @@ const risksData: Risk[] = [
   selector: 'app-table-display',
   templateUrl: './table-display.component.html',
   styleUrls: ['./table-display.component.css'],
-
-
-
-
 })
-
-
-
 
 export class TableDisplayComponent implements OnInit, AfterViewInit {
 
@@ -151,13 +146,13 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
 
-    this.GetDataService.getAllRisks().subscribe((res)=>{
-      console.log(res);
-      this.dataSource = new MatTableDataSource(res);
-    })
+    // this.GetDataService.getAllRisks().subscribe((res)=>{
+    //   console.log(res);
+    //   this.dataSource = new MatTableDataSource(res);
+    // })
 
   }
 
