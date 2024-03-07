@@ -1,5 +1,5 @@
 <div class="container">
-<h2 mat-dialog-title class="custom-title"> Create Risk </h2>
+<h2 mat-dialog-title class="custom-title"> {{isEditMode?'Edit Risk':'Create Risk'}} </h2>
 <div mat-dialog-content class="center-content">
 <form [formGroup]="createRiskForm" (ngSubmit)="createRisk()">
     

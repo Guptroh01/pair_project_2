@@ -87,10 +87,23 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
   <ng-container matColumnDef="update">
     <mat-header-cell *matHeaderCellDef> 
     </mat-header-cell>
+    <!-- last column for deleteing and editing using mat-menu -->
     <mat-cell *matCellDef="let element">
-      <button mat-icon-button (click)="openDialog()">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon >more_horiz</mat-icon> 
-    </button>
+     </button>
+     <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="editRisk()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+     
+      <button mat-menu-item (click)="deleteRisk()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+
+    </mat-menu>
     </mat-cell>
   </ng-container>
  
