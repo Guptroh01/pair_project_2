@@ -14,6 +14,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditDeleteComponent } from '../edit-delete/edit-delete.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { GetDataService } from 'src/app/services/get-data.service';
+import { MatChipInput } from '@angular/material/chips';
+// import { COMMA, ENTER } from '@angular/cdk/keycodes'
 
 const risksData: Risk[] = [
 
@@ -95,16 +97,10 @@ const risksData: Risk[] = [
   selector: 'app-table-display',
   templateUrl: './table-display.component.html',
   styleUrls: ['./table-display.component.css'],
-
-
-
-
 })
 
+export class TableDisplayComponent implements OnInit, AfterViewInit {
 
-
-
-export class TableDisplayComponent implements OnInit, AfterViewInit,OnChanges {
 
   dataSource!: MatTableDataSource<Risk> 
   constructor(public dialog: MatDialog, private elementRef: ElementRef,private GetDataService:GetDataService ){
@@ -145,8 +141,8 @@ export class TableDisplayComponent implements OnInit, AfterViewInit,OnChanges {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   ngOnInit() {
-    // this.dataSource.sort = this.sort;
-    // this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
     
  
   }
@@ -155,18 +151,14 @@ export class TableDisplayComponent implements OnInit, AfterViewInit,OnChanges {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
+
     this.GetDataService.getAllRisks().subscribe((res)=>{
       console.log(res,'jioji');
       this.dataSource = new MatTableDataSource(res);
     })
 
-  }
+    
 
-  ngOnChanges(){
-    this.GetDataService.getAllRisks().subscribe((res)=>{
-      console.log(res);
-      this.dataSource = new MatTableDataSource(res);
-    })
   }
 
   displayedColumns: string[] = ['risk_id', 'risk_category', 'hazards', 'risks', 'mitigation_status', 'pre_mitigation_risk_score', 'post_mitigation_risk_score', 'barriers', 'update'];

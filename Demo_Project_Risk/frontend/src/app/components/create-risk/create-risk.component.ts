@@ -10,6 +10,10 @@ import { MatOption } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import {GetDataService} from '../../services/get-data.service' 
 import {MatIconModule } from '@angular/material/icon';
+import { Risk } from 'src/app/Risk';
+// import { MatTableDataSource } from '@angular/material/table'
+
+// const risksData: Risk[] = [];
 
 interface Mitigation_Risk_Score{
   value: number;
@@ -55,6 +59,16 @@ export class CreateRiskComponent implements OnInit{
   }
 
   constructor(public dialogRef: MatDialogRef<CreateRiskComponent> ,private GetDataService :GetDataService) {}
+  //  validateStringorArray (control: FormControl) {
+  //   const value = control.value;
+  //   if(typeof value==='string'){
+  //     return null;
+  //   } else if(Array.isArray(value) && value.every(item => typeof item === 'string')){
+  //     return null;
+  //   }else{
+  //     return { invalidStringOrArray: true };
+  //   }
+  // }
 
   ngOnInit(): void {
     this.recordId = this.GetDataService.risk_id;
@@ -64,36 +78,33 @@ export class CreateRiskComponent implements OnInit{
       this.isEditMode = true;
     }
     this.initialiseForm();
-    
-    
   }
-
-  
 
   initialiseForm():void{
 
     this.createRiskForm = new FormGroup({
-      risk_category: new FormControl('',Validators.required),
-      hazards: new FormControl( '',Validators.required),
-      risks: new FormControl('',Validators.required),
+      risk_category: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z,]+$/)]),
+      hazards: new FormControl( "", [Validators.required, Validators.pattern(/^[a-zA-Z,]+$/)]),
+      risks: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z,]+$/)]),
       mitigation_status: new FormControl('',Validators.required),
       pre_mitigation_risk_score : new FormControl('',Validators.required),
       post_mitigation_risk_score: new FormControl('',Validators.required),
-      barriers: new FormControl('',Validators.required)
+      barriers: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z,]+$/)])
     });
     // defining the form
 
 
+
     if(this.isEditMode){
-      this.GetDataService.getRiskById(this.recordId).subscribe((res)=>{
+      console.log('in edit mode',this.recordId)
+      this.GetDataService.getRiskById(this.recordId).subscribe((res:any)=>{
+        console.log(res,'vmdsk')
         this.createRiskForm.patchValue(res);
+        // this.createRiskForm=res;
       })
-    }
 
   }
-
- 
-
+}
 
   closeDialog(): void{
     this.dialogRef.close();
@@ -101,6 +112,7 @@ export class CreateRiskComponent implements OnInit{
 
 
   submitForm(): void {
+
     // console.log("Form Created!!!!!");
     // console.log(this.createRiskForm.value);
     // this.GetDataService.createRisk(this.createRiskForm.value).subscribe((res:any)=>{
@@ -132,9 +144,12 @@ export class CreateRiskComponent implements OnInit{
     this.dialogRef.close(this.createRiskForm.value);
   
   }
+
   }
+
 
   createRisk() {
     console.log("Create Risk Called!",this.createRiskForm);
   }
+
 }
