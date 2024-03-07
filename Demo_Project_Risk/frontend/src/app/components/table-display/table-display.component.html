@@ -18,11 +18,24 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
 
     <mat-header-cell *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Hazards </mat-header-cell>
 
-    <mat-cell *matCellDef="let element">
+    <!-- <mat-cell *matCellDef="let element">
       <mat-chip-listbox>
         <mat-chip *ngFor="let hazard of element.hazards">{{hazard}}</mat-chip>
       </mat-chip-listbox>
-     </mat-cell>
+     
+     </mat-cell> -->
+      <!-- <mat-label>Favorite Fruits</mat-label> -->
+      <mat-chip-grid #chipGrid aria-label="Enter fruits" *matCellDef="let element">
+        <!-- @for (hazard of fruits; track hazard) { -->
+        <!-- <mat-chip *ngFor="let hazard of element.hazards"> {{hazard.name}} </mat-chip> -->
+        <!-- } -->
+        <!-- <input
+          [matChipInputFor]="chipGrid"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)"
+        /> -->
+      </mat-chip-grid>
   </ng-container>
  
   <!-- Symbol Column -->
@@ -97,8 +110,5 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;" (click) = "logRow(row)"></mat-row>
 </mat-table>
- 
+
 <mat-paginator [pageSizeOptions]="[5,10,25]" showFirstLastButtons ></mat-paginator>
- 
- 
- 
