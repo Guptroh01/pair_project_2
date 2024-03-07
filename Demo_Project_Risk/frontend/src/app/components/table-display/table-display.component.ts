@@ -115,41 +115,11 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
       console.log(res,'in constructor');
       this.dataSource = new MatTableDataSource<Risk>(res);
 
-      this.dataSource.sort = this.sort;
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
     })    
   }
-
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
-
-  announcer = inject(LiveAnnouncer);
-
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-
-    // Add our fruit
-    if (value) {
-      this.fruits.push({ name: value });
-    }
-
-    // Clear the input value
-    event.chipInput!.clear();
-  }
-  // addOnBlur = true;
-  // readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  // hazards: any;
-
-  // announcer = inject(LiveAnnouncer);
-  // add(event: MatChipInputEvent): void {
-  //   const value = (event.value || '').trim();
-  //   if (value) {
-  //     this.hazards.push({name: value});
-  //   }
-  //   event.chipInput!.clear();
-  // }
 
   openDialog(): void{
     const dialogRef = this.dialog.open(EditDeleteComponent, {
@@ -178,15 +148,11 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    
- 
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-
-
     this.GetDataService.getAllRisks().subscribe((res)=>{
       console.log(res,'jioji');
       this.dataSource = new MatTableDataSource(res);

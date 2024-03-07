@@ -3,7 +3,7 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
 >
   <!-- Position Column -->
   <ng-container matColumnDef="risk_id">
-    <mat-header-cell   *matHeaderCellDef mat-sort-header cdkDrag> Risk Id </mat-header-cell>
+    <mat-header-cell   *matHeaderCellDef mat-sort-header cdkDrag > Risk Id </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.risk_id}} </mat-cell>
   </ng-container>
  
@@ -16,26 +16,13 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
   <!-- Weight Column -->
   <ng-container matColumnDef="hazards">
 
-    <mat-header-cell *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Hazards </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle> drag_indicator</mat-icon>  Hazards </mat-header-cell>
 
-    <!-- <mat-cell *matCellDef="let element">
+    <mat-cell *matCellDef="let element">
       <mat-chip-listbox>
         <mat-chip *ngFor="let hazard of element.hazards">{{hazard}}</mat-chip>
       </mat-chip-listbox>
-     
-     </mat-cell> -->
-      <!-- <mat-label>Favorite Fruits</mat-label> -->
-      <mat-chip-grid #chipGrid aria-label="Enter fruits" *matCellDef="let element">
-        <!-- @for (hazard of fruits; track hazard) { -->
-        <!-- <mat-chip *ngFor="let hazard of element.hazards"> {{hazard.name}} </mat-chip> -->
-        <!-- } -->
-        <!-- <input
-          [matChipInputFor]="chipGrid"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          [matChipInputAddOnBlur]="addOnBlur"
-          (matChipInputTokenEnd)="add($event)"
-        /> -->
-      </mat-chip-grid>
+     </mat-cell>
   </ng-container>
  
   <!-- Symbol Column -->
@@ -78,7 +65,7 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
   <ng-container matColumnDef="barriers">
     <mat-header-cell *matHeaderCellDef cdkDrag cdkDragLockAxis="x"> <mat-icon cdkDragHandle > drag_indicator</mat-icon> Barriers </mat-header-cell>
     <mat-cell *matCellDef="let element"> 
-      <mat-chip-listbox>
+      <mat-chip-listbox class="mat-chip-color">
         <mat-chip *ngFor="let barrier of element.barriers">{{barrier}}</mat-chip>
       </mat-chip-listbox>
       </mat-cell>
