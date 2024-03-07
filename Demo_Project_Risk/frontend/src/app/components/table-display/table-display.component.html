@@ -15,9 +15,11 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
  
   <!-- Weight Column -->
   <ng-container matColumnDef="hazards">
-    <mat-header-cell *matHeaderCellDef cdkDrag><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Hazards </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef cdkDrag><mat-icon cdkDragHandle> drag_indicator</mat-icon>Hazards</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <mat-chip>{{element.hazards}}</mat-chip>
+      <mat-chip-listbox>
+        <mat-chip *ngFor="let hazard of element.hazards">{{hazard}}</mat-chip>
+      </mat-chip-listbox>
      </mat-cell>
   </ng-container>
  
@@ -25,7 +27,9 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
   <ng-container matColumnDef="risks">
     <mat-header-cell *matHeaderCellDef cdkDrag><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Risks </mat-header-cell>
     <mat-cell *matCellDef="let element"> 
-      <mat-chip> {{element.risks}} </mat-chip>
+      <mat-chip-listbox>
+        <mat-chip *ngFor="let risk of element.risks">{{risk}}</mat-chip>
+      </mat-chip-listbox>
       </mat-cell>
   </ng-container>
  
@@ -62,8 +66,6 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
       <mat-chip-listbox>
         <mat-chip *ngFor="let barrier of element.barriers">{{barrier}}</mat-chip>
       </mat-chip-listbox>
-      <!-- <mat-chip> {{element.barriers}} 
-      </mat-chip> -->
       </mat-cell>
   </ng-container>
  
