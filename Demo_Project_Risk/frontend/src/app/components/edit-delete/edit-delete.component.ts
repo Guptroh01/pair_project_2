@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef,MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
+import { CreateRiskComponent } from '../create-risk/create-risk.component';
 @Component({
   selector: 'app-edit-delete',
   templateUrl: './edit-delete.component.html',
@@ -10,10 +11,12 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true
 })
 export class EditDeleteComponent {
-  constructor(public dialogRef: MatDialogRef<EditDeleteComponent>){}
+  constructor(public dialogRef: MatDialogRef<EditDeleteComponent>,public dialog:MatDialog){}
 
   edit(){
-    console.log("Edit was clicked!")
+    const dialogRef = this.dialog.open(CreateRiskComponent, {
+      width: '500px'
+    });
   }
   
   delete(){

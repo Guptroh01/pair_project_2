@@ -57,10 +57,18 @@ export class CreateRiskComponent implements OnInit{
   constructor(public dialogRef: MatDialogRef<CreateRiskComponent> ,private GetDataService :GetDataService) {}
 
   ngOnInit(): void {
+    this.recordId = this.GetDataService.risk_id;
+    console.log(this.recordId,'in create form');
+
+    if(this.recordId !==undefined){
+      this.isEditMode = true;
+    }
     this.initialiseForm();
     
     
   }
+
+  
 
   initialiseForm():void{
 
@@ -77,7 +85,9 @@ export class CreateRiskComponent implements OnInit{
 
 
     if(this.isEditMode){
-      
+      this.GetDataService.getRiskById(this.recordId).subscribe((res)=>{
+        this.createRiskForm.patchValue(res);
+      })
     }
 
   }
@@ -91,14 +101,37 @@ export class CreateRiskComponent implements OnInit{
 
 
   submitForm(): void {
-    console.log("Form Created!!!!!");
-    console.log(this.createRiskForm.value);
-    this.GetDataService.createRisk(this.createRiskForm.value).subscribe((res:any)=>{
-      console.log(`Data submitted ${res}`)
-    },err=>{
-      console.log(err);
-    })
+    // console.log("Form Created!!!!!");
+    // console.log(this.createRiskForm.value);
+    // this.GetDataService.createRisk(this.createRiskForm.value).subscribe((res:any)=>{
+    //   console.log(`Data submitted ${res}`)
+    // },err=>{
+    //   console.log(err);
+    // })
+
+    const formData = this.createRiskForm.value;
+    if(this.createRiskForm.valid){
+      if(this.isEditMode){
+        this.GetDataService.updateRisk(this.recordId,formData).subscribe((res)=>{
+          console.log('data updated successfully')
+        },err=>{
+          console.log(err);
+        })
+      }
+    
+
+    else{
+      // create new risk
+
+      this.GetDataService.createRisk(formData).subscribe((res)=>{
+        console.log('Risk created successfully')
+      },err=>{
+        console.log(err)
+      })
+    }
     this.dialogRef.close(this.createRiskForm.value);
+  
+  }
   }
 
   createRisk() {
