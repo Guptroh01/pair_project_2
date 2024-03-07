@@ -83,13 +83,13 @@ export class CreateRiskComponent implements OnInit{
   initialiseForm():void{
 
     this.createRiskForm = new FormGroup({
-      risk_category: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z,]+$/)]),
-      hazards: new FormControl( "", [Validators.required, Validators.pattern(/^[a-zA-Z,]+$/)]),
-      risks: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z,]+$/)]),
+      risk_category: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z, ]+$/)]),
+      hazards: new FormControl( "", [Validators.required, Validators.pattern(/^[a-zA-Z, ]+$/)]),
+      risks: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z, ]+$/)]),
       mitigation_status: new FormControl('',Validators.required),
       pre_mitigation_risk_score : new FormControl('',Validators.required),
       post_mitigation_risk_score: new FormControl('',Validators.required),
-      barriers: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z,]+$/)])
+      barriers: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z, ]+$/)])
     });
     // defining the form
 
