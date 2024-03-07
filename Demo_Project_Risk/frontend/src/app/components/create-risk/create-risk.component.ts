@@ -59,17 +59,6 @@ export class CreateRiskComponent implements OnInit{
   }
 
   constructor(public dialogRef: MatDialogRef<CreateRiskComponent> ,private GetDataService :GetDataService) {}
-  //  validateStringorArray (control: FormControl) {
-  //   const value = control.value;
-  //   if(typeof value==='string'){
-  //     return null;
-  //   } else if(Array.isArray(value) && value.every(item => typeof item === 'string')){
-  //     return null;
-  //   }else{
-  //     return { invalidStringOrArray: true };
-  //   }
-  // }
-
   ngOnInit(): void {
     this.recordId = this.GetDataService.risk_id;
     console.log(this.recordId,'in create form');
@@ -113,14 +102,6 @@ export class CreateRiskComponent implements OnInit{
 
   submitForm(): void {
 
-    // console.log("Form Created!!!!!");
-    // console.log(this.createRiskForm.value);
-    // this.GetDataService.createRisk(this.createRiskForm.value).subscribe((res:any)=>{
-    //   console.log(`Data submitted ${res}`)
-    // },err=>{
-    //   console.log(err);
-    // })
-
     const formData = this.createRiskForm.value;
     if(this.createRiskForm.valid){
       if(this.isEditMode){
@@ -142,7 +123,6 @@ export class CreateRiskComponent implements OnInit{
       })
     }
     this.dialogRef.close(this.createRiskForm.value);
-  
   }
 
   }

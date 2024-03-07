@@ -122,26 +122,23 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
       console.log(res,'in constructor');
       this.dataSource = new MatTableDataSource<Risk>(res);
 
-      this.dataSource.sort = this.sort;
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-
-
-    })
-
+    })    
   }
-  // addOnBlur = true;
-  // readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  // hazards: any;
 
-  // announcer = inject(LiveAnnouncer);
-  // add(event: MatChipInputEvent): void {
-  //   const value = (event.value || '').trim();
-  //   if (value) {
-  //     this.hazards.push({name: value});
-  //   }
-  //   event.chipInput!.clear();
-  // }
-
+  openDialog(): void{
+    const dialogRef = this.dialog.open(EditDeleteComponent, {
+      width: 'auto',
+      position: {
+        top: `${this.elementRef.nativeElement.offsetTop}px`,
+        right: `${this.elementRef.nativeElement.offsetRight}px`
+      }
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed!!');
+    })
+  }
 
   logRow(row: any){
     
@@ -160,9 +157,9 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
+
     this.displayTable()
     
- 
   }
 
   ngOnChanges(){
@@ -174,7 +171,9 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
 
 
+
     this.displayTable()
+
 
     
 
