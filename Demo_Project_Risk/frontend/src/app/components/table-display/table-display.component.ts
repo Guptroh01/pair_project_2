@@ -1,5 +1,5 @@
 
-import { Component, ViewChild, AfterViewInit, Injectable, OnInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, Injectable, OnInit, ElementRef, inject } from '@angular/core';
 import { Risk } from 'src/app/Risk';
 import { MatSort, Sort } from '@angular/material/sort';
 import { CdkDrag, CdkDragMove, CdkDragStart, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -15,7 +15,13 @@ import { EditDeleteComponent } from '../edit-delete/edit-delete.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { GetDataService } from 'src/app/services/get-data.service';
 import { MatChipInput } from '@angular/material/chips';
-// import { COMMA, ENTER } from '@angular/cdk/keycodes'
+import { COMMA, ENTER } from '@angular/cdk/keycodes'
+import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+
+export interface Fruit {
+  name: string;
+}
 
 const risksData: Risk[] = [
 
@@ -110,10 +116,38 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
       this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
-    })
-
-    
+    })    
   }
+
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  fruits: Fruit[] = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
+
+  announcer = inject(LiveAnnouncer);
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.fruits.push({ name: value });
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+  // addOnBlur = true;
+  // readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  // hazards: any;
+
+  // announcer = inject(LiveAnnouncer);
+  // add(event: MatChipInputEvent): void {
+  //   const value = (event.value || '').trim();
+  //   if (value) {
+  //     this.hazards.push({name: value});
+  //   }
+  //   event.chipInput!.clear();
+  // }
 
   openDialog(): void{
     const dialogRef = this.dialog.open(EditDeleteComponent, {
