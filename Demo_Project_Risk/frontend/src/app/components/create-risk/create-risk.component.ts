@@ -71,55 +71,85 @@ export class CreateRiskComponent implements OnInit{
   // }
 
   ngOnInit(): void {
+    this.recordId = this.GetDataService.risk_id;
+    console.log(this.recordId,'in create form');
+
+    if(this.recordId !==undefined){
+      this.isEditMode = true;
+    }
     this.initialiseForm();
   }
-
-  // risksArr !: Risk[]
-  // dataSource!: MatTableDataSource < Risk[] > ;
-
 
   initialiseForm():void{
 
     this.createRiskForm = new FormGroup({
-      risk_category: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
-      hazards: new FormControl( "", [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
-      risks: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
+      risk_category: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z,]+$/)]),
+      hazards: new FormControl( "", [Validators.required, Validators.pattern(/^[a-zA-Z,]+$/)]),
+      risks: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z,]+$/)]),
       mitigation_status: new FormControl('',Validators.required),
       pre_mitigation_risk_score : new FormControl('',Validators.required),
       post_mitigation_risk_score: new FormControl('',Validators.required),
-      barriers: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')])
+      barriers: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z,]+$/)])
     });
     // defining the form
 
 
-    if(this.isEditMode){ 
-    }
+
+    if(this.isEditMode){
+      console.log('in edit mode',this.recordId)
+      this.GetDataService.getRiskById(this.recordId).subscribe((res:any)=>{
+        console.log(res,'vmdsk')
+        this.createRiskForm.patchValue(res);
+        // this.createRiskForm=res;
+      })
+
   }
+}
+
   closeDialog(): void{
     this.dialogRef.close();
   }
 
 
   submitForm(): void {
-    console.log("Form Created!!!!!");
-    console.log(this.createRiskForm.value);
 
-    this.GetDataService.createRisk(this.createRiskForm.value).subscribe((res:any)=>{
-      console.log(`Data submitted ${res}`)
-    },err=>{
-      console.log(err);
-    })
+    // console.log("Form Created!!!!!");
+    // console.log(this.createRiskForm.value);
+    // this.GetDataService.createRisk(this.createRiskForm.value).subscribe((res:any)=>{
+    //   console.log(`Data submitted ${res}`)
+    // },err=>{
+    //   console.log(err);
+    // })
+
+    const formData = this.createRiskForm.value;
+    if(this.createRiskForm.valid){
+      if(this.isEditMode){
+        this.GetDataService.updateRisk(this.recordId,formData).subscribe((res)=>{
+          console.log('data updated successfully')
+        },err=>{
+          console.log(err);
+        })
+      }
     
+
+    else{
+      // create new risk
+
+      this.GetDataService.createRisk(formData).subscribe((res)=>{
+        console.log('Risk created successfully')
+      },err=>{
+        console.log(err)
+      })
+    }
     this.dialogRef.close(this.createRiskForm.value);
-
-
-    // this.GetDataService.getAllRisks().subscribe((res) => {
-    //   console.log(res);
-    //   this.dataSource.data = res;
-    // });
+  
   }
+
+  }
+
 
   createRisk() {
     console.log("Create Risk Called!",this.createRiskForm);
   }
+
 }

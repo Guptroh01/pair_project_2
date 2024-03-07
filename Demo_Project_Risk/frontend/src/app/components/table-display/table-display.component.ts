@@ -1,5 +1,6 @@
 
-import { Component, ViewChild, AfterViewInit, Injectable, OnInit, ElementRef, inject } from '@angular/core';
+
+import { Component, ViewChild, AfterViewInit, Injectable, OnInit, ElementRef, OnChanges, inject } from '@angular/core';
 import { Risk } from 'src/app/Risk';
 import { MatSort, Sort } from '@angular/material/sort';
 import { CdkDrag, CdkDragMove, CdkDragStart, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -107,11 +108,12 @@ const risksData: Risk[] = [
 
 export class TableDisplayComponent implements OnInit, AfterViewInit {
 
+
   dataSource!: MatTableDataSource<Risk> 
   constructor(public dialog: MatDialog, private elementRef: ElementRef,private GetDataService:GetDataService ){
     this.GetDataService.getAllRisks().subscribe((res)=>{
       console.log(res,'in constructor');
-      this.dataSource = new MatTableDataSource(res)
+      this.dataSource = new MatTableDataSource<Risk>(res);
 
       this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -163,7 +165,8 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   }
 
   logRow(row: any){
-    console.log(row.hazards);
+    console.log(row.risk_id);
+    this.GetDataService.risk_id = row.risk_id;
   }
   // dataSource = new MatTableDataSource(risks);
    
@@ -175,16 +178,21 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    
+ 
   }
 
   ngAfterViewInit() {
-    // this.dataSource.sort = this.sort;
-    // this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
 
-    // this.GetDataService.getAllRisks().subscribe((res)=>{
-    //   console.log(res);
-    //   this.dataSource = new MatTableDataSource(res);
-    // })
+
+    this.GetDataService.getAllRisks().subscribe((res)=>{
+      console.log(res,'jioji');
+      this.dataSource = new MatTableDataSource(res);
+    })
+
+    
 
   }
 

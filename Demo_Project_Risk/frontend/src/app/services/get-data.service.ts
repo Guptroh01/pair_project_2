@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class GetDataService implements OnInit {
 
   constructor(private http:HttpClient) { }
+  public risk_id:any
 
   url:any = 'http://localhost:3000/risks';
 
@@ -17,11 +18,29 @@ export class GetDataService implements OnInit {
   }
 
 
+
+
   getAllRisks():Observable<any>{
     return this.http.get(this.url);
 
   }
-  updateRisk(id:any){
+
+  getRiskById(id:any):Observable<any>{
+    return this.http.get(this.url+'/'+id)
+
+  }
+  updateRisk(id:any,data:any): Observable<any>{
+    const hazardsArray = Array.isArray(data.hazards) ? data.hazards : [data.hazards];
+    const risksArray = Array.isArray(data.risks) ? data.risks : [data.risks];
+    const barriersArray = Array.isArray(data.barriers) ? data.barriers : [data.barriers];
+
+    const postdata= {
+      ...data,
+      hazards: hazardsArray,
+      risks: risksArray,
+      barriers: barriersArray
+    };
+    return this.http.put(`${this.url}/${id}`,postdata);
 
   }
 
