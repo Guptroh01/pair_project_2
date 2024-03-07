@@ -5,6 +5,10 @@ class RiskService{
         return await RiskDao.getAllRisks();
     }
 
+    async getRiskById(id){
+        return await RiskDao.getRiskById(id);
+    }
+
     async createRisk(riskData){
         return await RiskDao.createRisk(riskData);
     }

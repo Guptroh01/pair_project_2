@@ -59,6 +59,16 @@ export class CreateRiskComponent implements OnInit{
   }
 
   constructor(public dialogRef: MatDialogRef<CreateRiskComponent> ,private GetDataService :GetDataService) {}
+  //  validateStringorArray (control: FormControl) {
+  //   const value = control.value;
+  //   if(typeof value==='string'){
+  //     return null;
+  //   } else if(Array.isArray(value) && value.every(item => typeof item === 'string')){
+  //     return null;
+  //   }else{
+  //     return { invalidStringOrArray: true };
+  //   }
+  // }
 
   ngOnInit(): void {
     this.initialiseForm();
@@ -67,16 +77,17 @@ export class CreateRiskComponent implements OnInit{
   // risksArr !: Risk[]
   // dataSource!: MatTableDataSource < Risk[] > ;
 
+
   initialiseForm():void{
 
     this.createRiskForm = new FormGroup({
-      risk_category: new FormControl('',Validators.required),
-      hazards: new FormControl( '',Validators.required),
-      risks: new FormControl('',Validators.required),
+      risk_category: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
+      hazards: new FormControl( "", [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
+      risks: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
       mitigation_status: new FormControl('',Validators.required),
       pre_mitigation_risk_score : new FormControl('',Validators.required),
       post_mitigation_risk_score: new FormControl('',Validators.required),
-      barriers: new FormControl('',Validators.required)
+      barriers: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')])
     });
     // defining the form
 
@@ -92,11 +103,13 @@ export class CreateRiskComponent implements OnInit{
   submitForm(): void {
     console.log("Form Created!!!!!");
     console.log(this.createRiskForm.value);
+
     this.GetDataService.createRisk(this.createRiskForm.value).subscribe((res:any)=>{
       console.log(`Data submitted ${res}`)
     },err=>{
       console.log(err);
     })
+    
     this.dialogRef.close(this.createRiskForm.value);
 
 

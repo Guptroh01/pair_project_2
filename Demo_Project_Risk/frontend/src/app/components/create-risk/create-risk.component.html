@@ -71,7 +71,7 @@
     <div mat-dialog-actions class="custom-dialog">
    
         <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
-        <button mat-raised-button color="primary" (click)="submitForm()">Create</button>
+        <button mat-raised-button color="primary" (click)="submitForm()" [disabled]="!createRiskForm.valid">Create</button>
     </div>
    
    

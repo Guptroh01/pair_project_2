@@ -6,8 +6,13 @@ class RiskDao {
         return await Risk.findAll();
     }
 
+    async getRiskById(id) {
+        return await Risk.findByPk(id);
+    }
+
     async createRisk(riskData) {
         return await Risk.create(riskData);
+
     }
 
     async updateRisk(id, riskData){
