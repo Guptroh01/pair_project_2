@@ -12,17 +12,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Input } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
-import { EditDeleteComponent } from '../edit-delete/edit-delete.component';
+
 import { MatChipsModule } from '@angular/material/chips';
 import { GetDataService } from 'src/app/services/get-data.service';
 import { MatChipInput } from '@angular/material/chips';
-import { COMMA, ENTER } from '@angular/cdk/keycodes'
-import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 
-export interface Fruit {
-  name: string;
-}
+// import { COMMA, ENTER } from '@angular/cdk/keycodes'
+import { CreateRiskComponent } from '../create-risk/create-risk.component';
+
 
 const risksData: Risk[] = [
 
@@ -110,14 +107,23 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
 
 
   dataSource!: MatTableDataSource<Risk> 
+  riskId:any;
+
   constructor(public dialog: MatDialog, private elementRef: ElementRef,private GetDataService:GetDataService ){
+    
+
+    this.displayTable()
+
+    
+  }
+
+  displayTable(){
     this.GetDataService.getAllRisks().subscribe((res)=>{
       console.log(res,'in constructor');
       this.dataSource = new MatTableDataSource<Risk>(res);
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-
     })    
   }
 
@@ -135,10 +141,12 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   }
 
   logRow(row: any){
+    
     console.log(row.risk_id);
+    this.riskId= row.risk_id;
     this.GetDataService.risk_id = row.risk_id;
   }
-  // dataSource = new MatTableDataSource(risks);
+ 
    
    risksArr: Array<Risk> = [];
 
@@ -148,22 +156,51 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
+
+    this.displayTable()
+    
+  }
+
+  ngOnChanges(){
+    this.displayTable()
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.GetDataService.getAllRisks().subscribe((res)=>{
-      console.log(res,'jioji');
-      this.dataSource = new MatTableDataSource(res);
-    })
+
+
+
+    this.displayTable()
+
 
     
 
   }
 
   displayedColumns: string[] = ['risk_id', 'risk_category', 'hazards', 'risks', 'mitigation_status', 'pre_mitigation_risk_score', 'post_mitigation_risk_score', 'barriers', 'update'];
+  
+  editRisk(){
+    
+    const dialogRef = this.dialog.open(CreateRiskComponent, {
+      width: '500px'
+    });
 
+    this.displayTable()
+  }
+
+  deleteRisk(){
+    this.riskId = this.GetDataService.risk_id
+    
+    console.log("Delete was clicked!",this.riskId)
+    this.GetDataService.deleteRisk(this.riskId).subscribe(()=>{
+      console.log(`risk with ${this.riskId} deleted successfully`);
+
+    })
+
+    this.displayTable()
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.currentIndex === 0 || event.currentIndex === 1) {

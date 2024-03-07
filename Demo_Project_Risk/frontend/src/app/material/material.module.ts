@@ -15,6 +15,7 @@ import { MatIconModule,MatIcon } from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSelectModule, matSelectAnimations } from '@angular/material/select';
 import {MatChipsModule, MatChipInput} from '@angular/material/chips';
+import {MatMenuModule} from '@angular/material/menu';
 
 const MaterialUI = [
   MatButtonModule,
@@ -31,7 +32,8 @@ const MaterialUI = [
   MatSortModule,
   MatSelectModule,
   MatDialogModule,
-  MatChipsModule
+  MatChipsModule,
+  MatMenuModule
 ];
 
 

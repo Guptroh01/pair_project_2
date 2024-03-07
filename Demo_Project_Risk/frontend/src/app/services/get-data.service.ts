@@ -60,6 +60,11 @@ export class GetDataService implements OnInit {
     return this.http.post(this.url, postdata);
   }
 
+  deleteRisk(id:any):Observable<any>{
+    return this.http.delete(`${this.url}/${id}`);
+
+  }
+
 
   }
 
