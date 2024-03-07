@@ -101,8 +101,19 @@ const risksData: Risk[] = [
 
 export class TableDisplayComponent implements OnInit, AfterViewInit {
 
+  dataSource!: MatTableDataSource<Risk> 
+  constructor(public dialog: MatDialog, private elementRef: ElementRef,private GetDataService:GetDataService ){
+    this.GetDataService.getAllRisks().subscribe((res)=>{
+      console.log(res,'in constructor');
+      this.dataSource = new MatTableDataSource(res)
 
-  constructor(public dialog: MatDialog, private elementRef: ElementRef,private GetDataService:GetDataService ){}
+      this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+
+    })
+
+    
+  }
 
   openDialog(): void{
     const dialogRef = this.dialog.open(EditDeleteComponent, {
@@ -121,30 +132,17 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
     console.log(row.hazards);
   }
   // dataSource = new MatTableDataSource(risks);
-  risksArr !: Risk[]
-  dataSource!: MatTableDataSource < Risk[] > ;
+   
+   risksArr: Array<Risk> = [];
 
-  // constructor(private ApiService:ApiServiceService){
-
-  //   this.ApiService.getAllData().subscribe((res)=>{
-  //     this.risksArr = res;
-  //     console.log(res);
-  //     this.dataSource = new MatTableDataSource<Risk>(this.risksArr)
-
-  //   })
-  // }
-
-  @ViewChild(MatSort) sort !: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort !: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   ngOnInit() {
-    console.log(this.dataSource);
-    this.GetDataService.getAllRisks().subscribe((res)=>{
-      console.log(res);
-      this.dataSource = new MatTableDataSource(res);
-    })
-    // this.dataSource.sort= this.sort;
-    // this.dataSource.paginator= this.paginator;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    
+ 
   }
 
   ngAfterViewInit() {
