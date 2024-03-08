@@ -16,8 +16,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { GetDataService } from 'src/app/services/get-data.service';
 import { MatChipInput } from '@angular/material/chips';
-
-// import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { CreateRiskComponent } from '../create-risk/create-risk.component';
 
 
@@ -127,18 +125,6 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
     })    
   }
 
-  openDialog(): void{
-    const dialogRef = this.dialog.open(EditDeleteComponent, {
-      width: 'auto',
-      position: {
-        top: `${this.elementRef.nativeElement.offsetTop}px`,
-        right: `${this.elementRef.nativeElement.offsetRight}px`
-      }
-    })
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed!!');
-    })
-  }
 
   logRow(row: any){
     

@@ -1,19 +1,17 @@
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8"
 matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)"
 >
-  <!-- Position Column -->
-  <ng-container matColumnDef="risk_id">
-    <mat-header-cell   *matHeaderCellDef mat-sort-header cdkDrag > Risk Id </mat-header-cell>
+ 
+  <ng-container matColumnDef="risk_id" >
+    <mat-header-cell   *matHeaderCellDef mat-sort-header cdkDrag class="mat-header-cell" > Risk Id </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.risk_id}} </mat-cell>
   </ng-container>
- 
-  <!-- Name Column -->
+
   <ng-container matColumnDef="risk_category">
     <mat-header-cell *matHeaderCellDef  cdkDrag> Risk Category </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.risk_category}} </mat-cell>
   </ng-container>
  
-  <!-- Weight Column -->
   <ng-container matColumnDef="hazards">
 
     <mat-header-cell *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle> drag_indicator</mat-icon>  Hazards </mat-header-cell>
@@ -25,7 +23,6 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
      </mat-cell>
   </ng-container>
  
-  <!-- Symbol Column -->
   <ng-container matColumnDef="risks">
     <mat-header-cell *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Risks </mat-header-cell>
     <mat-cell *matCellDef="let element"> 
@@ -35,14 +32,11 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
       </mat-cell>
   </ng-container>
  
- 
   <ng-container matColumnDef="mitigation_status">
     <mat-header-cell *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Mitigation Status </mat-header-cell>
     <mat-cell *matCellDef="let element" [ngSwitch]="element.mitigation_status">  <div *ngSwitchCase="false">Closed</div>
       <div *ngSwitchCase="true">Open</div> </mat-cell>
   </ng-container>
- 
- 
  
   <ng-container matColumnDef="pre_mitigation_risk_score">
     <mat-header-cell *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Pre MitigationScore </mat-header-cell>
@@ -74,7 +68,7 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
   <ng-container matColumnDef="update">
     <mat-header-cell *matHeaderCellDef> 
     </mat-header-cell>
-    <!-- last column for deleteing and editing using mat-menu -->
+
     <mat-cell *matCellDef="let element">
       <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon >more_horiz</mat-icon> 
