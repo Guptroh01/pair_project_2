@@ -167,7 +167,7 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['risk_id', 'risk_category', 'hazards', 'risks', 'mitigation_status', 'pre_mitigation_risk_score', 'post_mitigation_risk_score', 'barriers', 'update'];
   
   editRisk(){
-    this.GetDataService.editData = true;
+    // this.GetDataService.editData = true;
     
     const dialogRef = this.dialog.open(CreateRiskComponent, {
       width: '500px'
