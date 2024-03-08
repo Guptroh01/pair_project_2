@@ -1,29 +1,4 @@
 
-/* mat-header-cell {
-
-    justify-content: center;
-    width:100px;
-    background-color: aqua;
-  }
-.mat-mdc-header-row{
-  background-color: aqua;
-  /* width: max-content; */
-}
-
-  mat-cell{
-    justify-content: flex-start;
-    align-self: center;
-
-  }
-  .tables{
-    display: inline;
-    justify-content: center;
-  }
-  .mat-elevation-z8{
-    display: inline;
-    justify-content: center;
-  
-  }
 
 
 .mat-table{
@@ -126,4 +101,3 @@
 
 
 }
-

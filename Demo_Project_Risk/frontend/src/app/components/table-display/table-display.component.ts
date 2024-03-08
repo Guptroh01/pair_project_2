@@ -173,6 +173,8 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
       width: '500px'
     });
 
+    
+
     this.displayTable()
   }
 
