@@ -1,4 +1,6 @@
-.mat-header-cell{
+
+/* mat-header-cell {
+
     justify-content: center;
     width:100px;
     background-color: aqua;
@@ -23,11 +25,105 @@
   
   }
 
-.mat-column-risk_id{
-  border: 1px solid currentColor;
+
+.mat-table{
+  width: 100%;
+  overflow-x: auto;
+  color: 
+  #CF2333
+  
+  #F4DD33
+  
+  #02A783
+  
+  #FAFAFA
+  
+  #EBEFEE
+  
+  #E50012
+  
+  /* #FFD800 paginator page color */
+  
+  /* #616161 inside text color */
+  
+  /* #1A2321; header text color */
+}
+
+.mat-cell,.mat-header-cell{
+  padding: 7px;
+  box-sizing: border-box;
+ 
+}
+.mat-header-row{
+  background-color: #f5f5f5;
 
 }
-.mat-column-risk_category{
-  border: 1px solid currentColor;
+
+.mat-row:nth-child(even){
+  background-color: #fafafa;
+}
+
+.mat-paginator{
+  margin-top: 20px;
+}
+
+
+.mat-header-cell mat-icon,.mat-cell mat-icon{
+  cursor: move;
+}
+
+.mat-cell button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.mat-cell button mat-icon{
+  color: #757575;
+}
+.mat-chip-color .mat-chip{
+  background: #e0e0e0;
+  color:#616161 ;
+}
+
+.mat-menu-item{
+  padding: 5px 10px;
+  background: #CF2333;
+}
+
+.mat-menu-item:hover{
+ /* background: #f5f5f5; */
+ background: #CF2333;
+}
+
+.mat-mdc-header-cell,.mat-mdc-cell{
+  width: fit-content;
+  background: transparent;
+  text-wrap: wrap;
+  justify-content: center;
+  border: 1px solid #CED7D4;;
+}
+
+
+
+.mat-table .mat-header-cell:last-child,
+.mat-table .mat-cell:last-child{
+  width: 10px;
+}
+
+.mat-column-barriers{
+  min-width: 100px;
+ /* border-left: 1px solid #616161; */
+
+
+}
+
+.mat-column-update{
+  max-width: 65px;
+  /* background: #000; */
+
+  justify-content: flex-center;
+
+
 }
 

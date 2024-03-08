@@ -10,6 +10,7 @@ export class GetDataService implements OnInit {
 
   constructor(private http:HttpClient) { }
   public risk_id:any
+  public editData!:boolean
 
   url:any = 'http://localhost:3000/risks';
 

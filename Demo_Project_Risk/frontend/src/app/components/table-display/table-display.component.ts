@@ -125,7 +125,6 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
     })    
   }
 
-
   logRow(row: any){
     
     console.log(row.risk_id);
@@ -140,8 +139,8 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
 
 
     this.displayTable()
@@ -168,6 +167,7 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['risk_id', 'risk_category', 'hazards', 'risks', 'mitigation_status', 'pre_mitigation_risk_score', 'post_mitigation_risk_score', 'barriers', 'update'];
   
   editRisk(){
+    this.GetDataService.editData = true;
     
     const dialogRef = this.dialog.open(CreateRiskComponent, {
       width: '500px'
@@ -191,7 +191,7 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   drop(event: CdkDragDrop<string[]>) {
     if (event.currentIndex === 0 || event.currentIndex === 1) {
       moveItemInArray(this.displayedColumns, event.previousIndex, event.previousIndex)
-    }
+    }    
     else {
       moveItemInArray(this.displayedColumns, event.previousIndex, event.currentIndex);
 
