@@ -11,6 +11,7 @@ class RiskDao {
     }
 
     async createRisk(riskData) {
+        console.log(riskData);
         return await Risk.create(riskData);
 
     }

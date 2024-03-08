@@ -31,9 +31,9 @@ export class GetDataService implements OnInit {
 
   }
   updateRisk(id:any,data:any): Observable<any>{
-    const hazardsArray = Array.isArray(data.hazards) ? data.hazards : [data.hazards];
-    const risksArray = Array.isArray(data.risks) ? data.risks : [data.risks];
-    const barriersArray = Array.isArray(data.barriers) ? data.barriers : [data.barriers];
+    const hazardsArray = Array.isArray(data.hazards) ? data.hazards.map((hazard: string) => `"${hazard.trim()}"`):[`"${data.hazards.trim()}"`];
+    const risksArray = Array.isArray(data.risks) ? data.risks.map((risk: string) => `"${risk.trim()}"`):[`"${data.risks.trim()}"`];
+    const barriersArray = Array.isArray(data.barriers) ? data.barriers.map((barrier: string) => `"${barrier.trim()}"`):[`"${data.barriers.trim()}"`];
 
     const postdata= {
       ...data,
@@ -47,9 +47,9 @@ export class GetDataService implements OnInit {
 
 
   createRisk(data: any): Observable<any>{
-    const hazardsArray = Array.isArray(data.hazards) ? data.hazards : [data.hazards];
-    const risksArray = Array.isArray(data.risks) ? data.risks : [data.risks];
-    const barriersArray = Array.isArray(data.barriers) ? data.barriers : [data.barriers];
+    const hazardsArray = Array.isArray(data.hazards) ? data.hazards.map((hazard: string) => `"${hazard.trim()}"`):[`"${data.hazards.trim()}"`];
+    const risksArray = Array.isArray(data.risks) ? data.risks.map((risk: string) => `"${risk.trim()}"`):[`"${data.risks.trim()}"`];
+    const barriersArray = Array.isArray(data.barriers) ? data.barriers.map((barrier: string) => `"${barrier.trim()}"`):[`"${data.barriers.trim()}"`];
 
     const postdata= {
       ...data,
@@ -58,7 +58,7 @@ export class GetDataService implements OnInit {
       barriers: barriersArray
     };
 
-    return this.http.post(this.url, postdata);
+    return this.http.post(this.url, data);
   }
 
   deleteRisk(id:any):Observable<any>{

@@ -16,8 +16,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { GetDataService } from 'src/app/services/get-data.service';
 import { MatChipInput } from '@angular/material/chips';
-
-// import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { CreateRiskComponent } from '../create-risk/create-risk.component';
 
 
@@ -126,8 +124,6 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     })    
   }
-
-
 
   logRow(row: any){
     

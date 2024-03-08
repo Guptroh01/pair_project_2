@@ -1,7 +1,14 @@
+
 /* mat-header-cell {
+
     justify-content: center;
-    width: fit-content;
+    width:100px;
+    background-color: aqua;
   }
+.mat-mdc-header-row{
+  background-color: aqua;
+  /* width: max-content; */
+}
 
   mat-cell{
     justify-content: flex-start;
@@ -17,14 +24,6 @@
     justify-content: center;
   
   }
-
-.mat-column-risk_id{
-  border: 1px solid currentColor;
-  width: 20px;
-}
-.mat-column-risk_category{
-  border: 1px solid currentColor;
-} */
 
 
 .mat-table{
@@ -127,3 +126,4 @@
 
 
 }
+
