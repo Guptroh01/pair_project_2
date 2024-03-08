@@ -61,11 +61,12 @@ export class CreateRiskComponent implements OnInit{
   constructor(public dialogRef: MatDialogRef<CreateRiskComponent> ,private GetDataService :GetDataService) {}
   ngOnInit(): void {
     this.recordId = this.GetDataService.risk_id;
-    console.log(this.recordId,'in create form');
+    console.log(this.recordId,'in create form');   
+      this.isEditMode = this.GetDataService.editData;
+      console.log(this.isEditMode)
 
-    if(this.recordId !==undefined){
-      this.isEditMode = true;
-    }
+      // sharing data between componenets through GetDataService
+    
     this.initialiseForm();
   }
 
@@ -103,6 +104,7 @@ export class CreateRiskComponent implements OnInit{
   submitForm(): void {
 
     const formData = this.createRiskForm.value;
+    console.log(formData);
     if(this.createRiskForm.valid){
       if(this.isEditMode){
         this.GetDataService.updateRisk(this.recordId,formData).subscribe((res)=>{
