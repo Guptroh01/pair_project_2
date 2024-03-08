@@ -92,14 +92,13 @@ export class CreateRiskComponent implements OnInit{
         this.createRiskForm.patchValue(res);
         // this.createRiskForm=res;
       })
-
   }
 }
-
   closeDialog(): void{
     this.dialogRef.close();
+    this.GetDataService.editData = false;
+    
   }
-
 
   submitForm(): void {
 
@@ -112,6 +111,7 @@ export class CreateRiskComponent implements OnInit{
         },err=>{
           console.log(err);
         })
+        this.dialogRef.close(this.closeDialog);
       }
     
 
@@ -124,7 +124,9 @@ export class CreateRiskComponent implements OnInit{
         console.log(err)
       })
     }
+   
     this.dialogRef.close(this.createRiskForm.value);
+    // this.closeDialog()
   }
 
   }

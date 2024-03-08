@@ -30,7 +30,7 @@ export class ToolbarComponent {
   });
 
   dialogRef.afterClosed().subscribe(result => {
-    console.log('Dialog Closed');
+    console.log(result,"toolbar data")
   })
   }
 }
