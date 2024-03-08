@@ -10,7 +10,7 @@ export class GetDataService implements OnInit {
 
   constructor(private http:HttpClient) { }
   public risk_id:any
-  public editData!:boolean
+public editData!:boolean
 
   url:any = 'http://localhost:3000/risks';
 
@@ -31,9 +31,10 @@ export class GetDataService implements OnInit {
 
   }
   updateRisk(id:any,data:any): Observable<any>{
-    const hazardsArray = Array.isArray(data.hazards) ? data.hazards.map((hazard: string) => `"${hazard.trim()}"`):[`"${data.hazards.trim()}"`];
+     const hazardsArray = Array.isArray(data.hazards) ? data.hazards.map((hazard: string) => `"${hazard.trim()}"`):[`"${data.hazards.trim()}"`];
     const risksArray = Array.isArray(data.risks) ? data.risks.map((risk: string) => `"${risk.trim()}"`):[`"${data.risks.trim()}"`];
     const barriersArray = Array.isArray(data.barriers) ? data.barriers.map((barrier: string) => `"${barrier.trim()}"`):[`"${data.barriers.trim()}"`];
+
 
     const postdata= {
       ...data,

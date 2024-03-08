@@ -13,9 +13,15 @@ class RiskController{
 
     async getRiskById(req, res) {
         const {id} = req.params;
+        const riskData = req.body;
+
         try {
-            const risks = await RiskService.getRiskById(id);
-            res.json(risks);
+            riskData.risks = riskData.risks.split(',').map(risk => risk.trim());
+            riskData.hazards = riskData.hazards.split(',').map(hazard => hazard.trim());
+            riskData.barriers = riskData.barriers.split(',').map(barriers => barriers.trim());
+
+            const risk = await RiskService.getRiskById(id);
+            res.json(risk);
         } catch (error) {
             res.status(500).json({error: error.message});
         }
@@ -37,7 +43,6 @@ class RiskController{
         const {id} = req.params;
         const riskData = req.body;
         try {
-            
            const updatedRisk = await RiskService.updateRisk(id, riskData);
            if(!updatedRisk) 
            {
