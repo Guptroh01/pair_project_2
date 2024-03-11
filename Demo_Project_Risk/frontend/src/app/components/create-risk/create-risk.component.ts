@@ -115,6 +115,8 @@ export class CreateRiskComponent implements OnInit{
           console.log('data updated successfully')
           this.GetDataService.getAllRisks().subscribe((res)=>{
             this.DisplayDataService.updateTableData(res);
+           
+            console.log("res in update ",res);
                     
            
           })  
@@ -132,6 +134,8 @@ export class CreateRiskComponent implements OnInit{
         console.log('Risk created successfully')
         this.GetDataService.getAllRisks().subscribe((res)=>{
           this.DisplayDataService.updateTableData(res);
+          console.log("res in create ",res);
+
                   
          
         })  

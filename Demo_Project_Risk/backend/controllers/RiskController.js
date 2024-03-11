@@ -39,6 +39,13 @@ class RiskController{
         console.log(req.body.risks);
         
         try {
+
+            
+            console.log(riskData,"in update bakcend");
+            riskData.risks = riskData.risks[0].split(',')
+            riskData.hazards = riskData.hazards[0].split(',')
+            riskData.barriers = riskData.barriers[0].split(',')
+            console.log(riskData,"in update bakcend 332");
            const updatedRisk = await RiskService.updateRisk(id, riskData);
 
            if(!updatedRisk) {

@@ -14,50 +14,50 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
  
   <ng-container matColumnDef="hazards">
 
-    <mat-header-cell class="mat-header-cell" *matHeaderCellDef mat-sort-header cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle> drag_indicator</mat-icon>  Hazards </mat-header-cell>
+    <mat-header-cell class="mat-header-cell" *matHeaderCellDef mat-sort-header cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle style="color: #9e9e9e;" > drag_indicator</mat-icon>  Hazards </mat-header-cell>
 
     <mat-cell class="mat-cell"  *matCellDef="let element">
-      <mat-chip-listbox>
+      <mat-chip-listbox class="mat-chip-color">
         <mat-chip *ngFor="let hazard of element.hazards">{{hazard}}</mat-chip>
       </mat-chip-listbox>
      </mat-cell>
   </ng-container>
  
   <ng-container matColumnDef="risks">
-    <mat-header-cell  class="mat-header-cell" *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Risks </mat-header-cell>
+    <mat-header-cell  class="mat-header-cell" *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle style="color: #616161;"> drag_indicator</mat-icon>  Risks </mat-header-cell>
     <mat-cell class="mat-cell"  *matCellDef="let element"> 
-      <mat-chip-listbox>
+      <mat-chip-listbox class="mat-chip-color">
         <mat-chip *ngFor="let risk of element.risks">{{risk}}</mat-chip>
       </mat-chip-listbox>
       </mat-cell>
   </ng-container>
  
   <ng-container matColumnDef="mitigation_status">
-    <mat-header-cell class="mat-header-cell" *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Mitigation Status </mat-header-cell>
+    <mat-header-cell class="mat-header-cell" *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle style="color: #616161;"> drag_indicator</mat-icon>  Mitigation Status </mat-header-cell>
     <mat-cell  class="mat-cell" *matCellDef="let element" [ngSwitch]="element.mitigation_status">  <div *ngSwitchCase="false">Closed</div>
       <div *ngSwitchCase="true">Open</div> </mat-cell>
   </ng-container>
  
   <ng-container matColumnDef="pre_mitigation_risk_score">
-    <mat-header-cell class="mat-header-cell" *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Pre MitigationScore </mat-header-cell>
+    <mat-header-cell class="mat-header-cell" *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle style="color:#616161;" > drag_indicator</mat-icon>  Pre-Mitigation Risk Score </mat-header-cell>
     <mat-cell  class="mat-cell" *matCellDef="let element" [ngSwitch]="element.pre_mitigation_risk_score">
       <span *ngSwitchCase="0" class ="mitigation_status"><mat-icon [ngStyle]="{'color':'#02A783'}">circle</mat-icon> Low </span>
-     <span *ngSwitchCase="1"><mat-icon [ngStyle]="{'color':'#F4DD33'}">circle</mat-icon> Medium </span>
-     <span *ngSwitchCase="2"><mat-icon [ngStyle]="{'color':'#CF2333'}">circle</mat-icon> High </span>
+     <span *ngSwitchCase="1" class ="mitigation_status"><mat-icon [ngStyle]="{'color':'#F4DD33'}">circle</mat-icon> Medium </span>
+     <span *ngSwitchCase="2" class ="mitigation_status"><mat-icon [ngStyle]="{'color':'#CF2333'}">circle</mat-icon> High </span>
     </mat-cell>
   </ng-container>
  
   <ng-container matColumnDef="post_mitigation_risk_score">
-    <mat-header-cell class="mat-header-cell" *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle > drag_indicator</mat-icon>  Post MitigationScore </mat-header-cell>
+    <mat-header-cell class="mat-header-cell" *matHeaderCellDef cdkDrag cdkDragLockAxis="x"><mat-icon cdkDragHandle style="color: #616161;"> drag_indicator</mat-icon>  Post-Mitigation Risk Score </mat-header-cell>
     <mat-cell  class="mat-cell" *matCellDef="let element" [ngSwitch]="element.post_mitigation_risk_score">
       <span *ngSwitchCase="0" class ="mitigation_status"><mat-icon [ngStyle]="{'color':'#02A783'}">circle</mat-icon> Low </span>
-     <span *ngSwitchCase="1"><mat-icon [ngStyle]="{'color':'#F4DD33'}">circle</mat-icon> Medium </span>
-     <span *ngSwitchCase="2"><mat-icon [ngStyle]="{'color':'#CF2333'}">circle</mat-icon> High </span>
+     <span *ngSwitchCase="1" class ="mitigation_status"><mat-icon [ngStyle]="{'color':'#F4DD33'}">circle</mat-icon> Medium </span>
+     <span *ngSwitchCase="2" class ="mitigation_status"><mat-icon [ngStyle]="{'color':'#CF2333'}">circle</mat-icon> High </span>
    </mat-cell>
   </ng-container>
  
   <ng-container matColumnDef="barriers">
-    <mat-header-cell class="mat-header-cell"  *matHeaderCellDef cdkDrag cdkDragLockAxis="x"> <mat-icon cdkDragHandle > drag_indicator</mat-icon> Barriers </mat-header-cell>
+    <mat-header-cell class="mat-header-cell"  *matHeaderCellDef cdkDrag cdkDragLockAxis="x"> <mat-icon cdkDragHandle style="color: #616161;" > drag_indicator</mat-icon> Barriers/Controls </mat-header-cell>
     <mat-cell  class="mat-cell" *matCellDef="let element"> 
       <mat-chip-listbox class="mat-chip-color">
         <mat-chip class="mat-chip" *ngFor="let barrier of element.barriers">{{barrier}}</mat-chip>
