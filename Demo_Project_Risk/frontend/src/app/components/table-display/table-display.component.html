@@ -93,4 +93,16 @@ matSort  cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="d
   <mat-row *matRowDef="let row; columns: displayedColumns;" (click) = "logRow(row)"></mat-row>
 </mat-table>
 
-<mat-paginator [pageSizeOptions]="[5,10,25]" showFirstLastButtons  class="mat-paginator"></mat-paginator>
+
+
+<!-- <button (click)="findLength()"> BTN </button> -->
+<mat-paginator
+  appBubblePagination
+  [appCustomLength]="dataSource.data.length"
+  [length]="dataSource.data.length"
+  [pageSizeOptions]="[5, 10, 25]"
+  aria-label="Select page"
+>
+</mat-paginator>
+
+<!-- <mat-paginator [pageSizeOptions]="[5,10,25]" showFirstLastButtons [length]="dataSource.data.length" class="mat-paginator"></mat-paginator> -->
