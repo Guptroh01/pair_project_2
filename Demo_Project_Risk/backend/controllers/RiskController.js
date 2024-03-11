@@ -14,7 +14,6 @@ class RiskController{
     async getRiskById(req, res) {
         const {id} = req.params;
         try {
-            
             const risks = await RiskService.getRiskById(id);
             res.json(risks);
         } catch (error) {
@@ -24,9 +23,9 @@ class RiskController{
     async createRisk(req, res) {
         const riskData = req.body;
         try {
-            riskData.risks = riskData.risks.split(',').map(risk => risk.trim());
-            riskData.hazards = riskData.hazards.split(',').map(hazard => hazard.trim());
-            riskData.barriers = riskData.barriers.split(',').map(barriers => barriers.trim());
+            riskData.risks = riskData.risks.split(',').map(risk => risk.trim()).filter(risk => risk !== '');
+            riskData.hazards = riskData.hazards.split(',').map(hazard => hazard.trim()).filter(hazard => hazard !== '');
+            riskData.barriers = riskData.barriers.split(',').map(barriers => barriers.trim()).filter(barrier => barrier !== '');
             const risk = await RiskService.createRisk(riskData);
             res.status(201).json(risk)
         } catch (error) {
@@ -37,6 +36,8 @@ class RiskController{
     async updateRisk(req, res) {
         const {id} = req.params;
         const riskData = req.body;
+        console.log(req.body.risks);
+        
         try {
            const updatedRisk = await RiskService.updateRisk(id, riskData);
 
