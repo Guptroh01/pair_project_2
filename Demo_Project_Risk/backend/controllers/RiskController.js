@@ -13,15 +13,10 @@ class RiskController{
 
     async getRiskById(req, res) {
         const {id} = req.params;
-        const riskData = req.body;
-
         try {
-            riskData.risks = riskData.risks.split(',').map(risk => risk.trim());
-            riskData.hazards = riskData.hazards.split(',').map(hazard => hazard.trim());
-            riskData.barriers = riskData.barriers.split(',').map(barriers => barriers.trim());
-
-            const risk = await RiskService.getRiskById(id);
-            res.json(risk);
+            
+            const risks = await RiskService.getRiskById(id);
+            res.json(risks);
         } catch (error) {
             res.status(500).json({error: error.message});
         }
@@ -44,15 +39,16 @@ class RiskController{
         const riskData = req.body;
         try {
            const updatedRisk = await RiskService.updateRisk(id, riskData);
-           if(!updatedRisk) 
-           {
-            return res.status(404).json({error: 'Risk Not Found'}); 
+
+           if(!updatedRisk) {
+            return res.status(404).json({error: 'Risk Not Found'});
            }
            res.json(updatedRisk);
-        } catch (error) {
-            res.status(400).json({error: error.message})
-        }
     }
+    catch(error){
+        res.status(400).json({error: error.message});
+    }
+}
 
     async deleteRisk(req, res){
         const {id} = req.params;
