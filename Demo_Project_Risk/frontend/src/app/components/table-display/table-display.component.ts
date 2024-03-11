@@ -47,11 +47,12 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
 
   displayTable(){
     this.GetDataService.getAllRisks().subscribe((res)=>{
-      console.log(res,'in constructor');
+      console.log(res,'in display table');
       this.dataSource = new MatTableDataSource<Risk>(res);
-
+      console.log(this.dataSource);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    console.log(this.dataSource,"in table");
     })    
   }
 
@@ -76,6 +77,8 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
     this.displayTable()
     this.DisplayDataService.currentData.subscribe((data)=>{
       this.dataSource = data;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     })
     
   }
@@ -89,7 +92,7 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-
+   
 
 
     this.displayTable()
@@ -110,7 +113,8 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
 
     
 
-    this.displayTable()
+    // this.displayTable()
+    
   }
 
   deleteRisk(){

@@ -40,11 +40,13 @@ class RiskController{
         
         try {
 
+
             console.log(riskData,"in update backend");
             riskData.risks = riskData.risks[0].split(',').filter(risk => risk!== '');
             riskData.hazards = riskData.hazards[0].split(',').filter(risk => risk!== '')
             riskData.barriers = riskData.barriers[0].split(',').filter(risk => risk!== '')
             console.log(riskData,"in update backend 332");
+
            const updatedRisk = await RiskService.updateRisk(id, riskData);
 
            if(!updatedRisk) {
