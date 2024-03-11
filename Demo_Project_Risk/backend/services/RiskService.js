@@ -17,6 +17,7 @@ class RiskService{
         return await RiskDao.updateRisk(id, riskData);
     }
 
+
     async deleteRisk(id){
         return await RiskDao.deleteRisk(id);
     }
