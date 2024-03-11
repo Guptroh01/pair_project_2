@@ -57,17 +57,6 @@ public editData!:boolean
 }
 
   createRisk(data: any): Observable<any>{
-    // const hazardsArray = Array.isArray(data.hazards) ? data.hazards.map((hazard: string) => `"${hazard.trim()}"`):[`"${data.hazards.trim()}"`];
-    // const risksArray = Array.isArray(data.risks) ? data.risks.map((risk: string) => `"${risk.trim()}"`):[`"${data.risks.trim()}"`];
-    // const barriersArray = Array.isArray(data.barriers) ? data.barriers.map((barrier: string) => `"${barrier.trim()}"`):[`"${data.barriers.trim()}"`];
-
-    // const postdata= {
-    //   ...data,
-    //   hazards: hazardsArray,
-    //   risks: risksArray,
-    //   barriers: barriersArray
-    // };
-
     return this.http.post(this.url, data);
   }
 

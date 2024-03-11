@@ -12,6 +12,7 @@ import {GetDataService} from '../../services/get-data.service'
 import {MatIconModule } from '@angular/material/icon';
 import { Risk } from 'src/app/Risk';
 import {DisplayDataService} from '../../services/display-data.service'
+import { forkJoin } from 'rxjs';
 // import { MatTableDataSource } from '@angular/material/table'
 
 // const risksData: Risk[] = [];
@@ -104,13 +105,14 @@ export class CreateRiskComponent implements OnInit{
     this.GetDataService.editData = false;
     
   }
-
+  
   submitForm(): void {
 
     const formData = this.createRiskForm.value;
     console.log(formData);
     if(this.createRiskForm.valid){
       if(this.isEditMode){
+        console.log(formData.barriers,formData.risks,formData.hazards);
         this.GetDataService.updateRisk(this.recordId,formData).subscribe((res)=>{
           console.log('data updated successfully')
           this.GetDataService.getAllRisks().subscribe((res)=>{
@@ -131,8 +133,10 @@ export class CreateRiskComponent implements OnInit{
       // create new risk
 
       this.GetDataService.createRisk(formData).subscribe((res)=>{
-        console.log('Risk created successfully')
+        console.log('Risk created successfully');
+        console.log(formData);
         this.GetDataService.getAllRisks().subscribe((res)=>{
+          
           this.DisplayDataService.updateTableData(res);
           console.log("res in create ",res);
 

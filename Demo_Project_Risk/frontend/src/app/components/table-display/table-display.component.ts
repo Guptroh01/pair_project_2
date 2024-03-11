@@ -18,6 +18,7 @@ import { GetDataService } from 'src/app/services/get-data.service';
 import { MatChipInput } from '@angular/material/chips';
 import { CreateRiskComponent } from '../create-risk/create-risk.component';
 import {DisplayDataService} from '../../services/display-data.service'
+import { MatTable } from '@angular/material/table';
 
 
 @Component({
@@ -38,6 +39,10 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
     this.displayTable()
 
     
+  }
+
+  findLength(){
+    return this.dataSource.data.length;
   }
 
   displayTable(){

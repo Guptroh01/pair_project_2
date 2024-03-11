@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {MaterialModule} from './material/material.module';
 import { MatIcon } from '@angular/material/icon';
+import { BubblePaginationDirective } from './directives/bubble-pagination.directive';
  
 @NgModule({
   declarations: [
@@ -27,13 +28,15 @@ import { MatIcon } from '@angular/material/icon';
     HttpClientModule,
     CommonModule, 
     CreateRiskComponent,
-    FormsModule
+    FormsModule,
+    BubblePaginationDirective
   ],
 
   exports: [ToolbarComponent, 
             CommonModule, 
             CreateRiskComponent,
             MaterialModule,
+            BubblePaginationDirective
            ],
 
   providers: [],
