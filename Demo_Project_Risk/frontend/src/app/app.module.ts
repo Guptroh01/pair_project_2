@@ -27,6 +27,7 @@ import { MatIcon } from '@angular/material/icon';
     HttpClientModule,
     CommonModule, 
     CreateRiskComponent,
+    FormsModule
   ],
 
   exports: [ToolbarComponent, 

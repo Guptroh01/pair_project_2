@@ -69,7 +69,11 @@ export class CreateRiskComponent implements OnInit{
     
     this.initialiseForm();
   }
-
+  
+  ngOnDestroy(){
+    this.isEditMode =false;
+    this.GetDataService.editData = false;
+  }
   initialiseForm():void{
 
     this.createRiskForm = new FormGroup({

@@ -61,6 +61,7 @@
   color:#616161 ;
 }
 
+
 .mat-menu-item{
   padding: 5px 10px;
   background: #CF2333;
@@ -101,3 +102,16 @@
 
 
 }
+
+ .paginator{
+  .mat-mdc-paginator-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+
+
+    
+  }
+ }
+  
