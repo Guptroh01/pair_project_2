@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import {GetDataService} from '../../services/get-data.service' 
 import {MatIconModule } from '@angular/material/icon';
 import { Risk } from 'src/app/Risk';
+import {DisplayDataService} from '../../services/display-data.service'
 // import { MatTableDataSource } from '@angular/material/table'
 
 // const risksData: Risk[] = [];
@@ -58,7 +59,7 @@ export class CreateRiskComponent implements OnInit{
     console.log(event.value);
   }
 
-  constructor(public dialogRef: MatDialogRef<CreateRiskComponent> ,private GetDataService :GetDataService) {}
+  constructor(public dialogRef: MatDialogRef<CreateRiskComponent> ,private GetDataService :GetDataService,private DisplayDataService:DisplayDataService) {}
   ngOnInit(): void {
     this.recordId = this.GetDataService.risk_id;
     console.log(this.recordId,'in create form');   
@@ -112,6 +113,11 @@ export class CreateRiskComponent implements OnInit{
       if(this.isEditMode){
         this.GetDataService.updateRisk(this.recordId,formData).subscribe((res)=>{
           console.log('data updated successfully')
+          this.GetDataService.getAllRisks().subscribe((res)=>{
+            this.DisplayDataService.updateTableData(res);
+                    
+           
+          })  
         },err=>{
           console.log(err);
         })
@@ -124,6 +130,11 @@ export class CreateRiskComponent implements OnInit{
 
       this.GetDataService.createRisk(formData).subscribe((res)=>{
         console.log('Risk created successfully')
+        this.GetDataService.getAllRisks().subscribe((res)=>{
+          this.DisplayDataService.updateTableData(res);
+                  
+         
+        })  
       },err=>{
         console.log(err)
       })

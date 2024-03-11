@@ -17,83 +17,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { GetDataService } from 'src/app/services/get-data.service';
 import { MatChipInput } from '@angular/material/chips';
 import { CreateRiskComponent } from '../create-risk/create-risk.component';
+import {DisplayDataService} from '../../services/display-data.service'
 
-
-const risksData: Risk[] = [
-
-  {
-    risk_id: 1,
-    risk_category: 'Reserviour damage',
-    hazards: ['abc'],
-    risks: ['shutdown', 'leak'],
-    mitigation_status: false,
-    pre_mitigation_risk_score: 0,
-    post_mitigation_risk_score: 1,
-    barriers: ['water']
-
-  },
-
-
-  {
-    risk_id: 2,
-    risk_category: 'Reserviour damage',
-    hazards: ['abc'],
-    risks: ['shutdown', 'leak'],
-    mitigation_status: false,
-    pre_mitigation_risk_score: 1,
-    post_mitigation_risk_score: 1,
-    barriers: ['water']
-
-  },
-
-  {
-    risk_id: 3,
-    risk_category: 'Reserviour damage',
-    hazards: ['abc'],
-    risks: ['shutdown', 'leak'],
-    mitigation_status: false,
-    pre_mitigation_risk_score: 2,
-    post_mitigation_risk_score: 1,
-    barriers: ['water']
-
-  },
-
-  {
-    risk_id: 4,
-    risk_category: 'Reserviour damage',
-    hazards: ['abcabcabcabcabcabcabcabcabcabcabc'],
-    risks: ['shutdown', 'leak'],
-    mitigation_status: false,
-    pre_mitigation_risk_score: 0,
-    post_mitigation_risk_score: 1,
-    barriers: ['water']
-
-  },
-
-  {
-    risk_id: 5,
-    risk_category: 'Reserviour damage',
-    hazards: ['abc'],
-    risks: ['shutdown', 'leak'],
-    mitigation_status: false,
-    pre_mitigation_risk_score: 0,
-    post_mitigation_risk_score: 1,
-    barriers: ['water']
-
-  },
-
-   {
-    risk_id: 6,
-    risk_category: 'Reserviour damage',
-    hazards: ['abc'],
-    risks: ['shutdown', 'leak'],
-    mitigation_status: false,
-    pre_mitigation_risk_score: 2,
-    post_mitigation_risk_score: 1,
-    barriers: ['waterjhgfddf', 'wa', 'water2']
-
-  },
-]
 
 @Component({
   selector: 'app-table-display',
@@ -107,7 +32,7 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   dataSource!: MatTableDataSource<Risk> 
   riskId:any;
 
-  constructor(public dialog: MatDialog, private elementRef: ElementRef,private GetDataService:GetDataService ){
+  constructor(public dialog: MatDialog, private elementRef: ElementRef,private GetDataService:GetDataService,private DisplayDataService:DisplayDataService ){
     
 
     this.displayTable()
@@ -144,11 +69,16 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
 
 
     this.displayTable()
+    this.DisplayDataService.currentData.subscribe((data)=>{
+      this.dataSource = data;
+    })
     
   }
 
   ngOnChanges(){
     this.displayTable()
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   ngAfterViewInit() {
