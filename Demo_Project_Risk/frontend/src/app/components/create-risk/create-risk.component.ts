@@ -90,7 +90,7 @@ export class CreateRiskComponent implements OnInit{
       this.GetDataService.getRiskById(this.recordId).subscribe((res:any)=>{
         console.log(res,'vmdsk')
         this.createRiskForm.patchValue(res);
-        // this.createRiskForm=res;
+        
       })
   }
 }
