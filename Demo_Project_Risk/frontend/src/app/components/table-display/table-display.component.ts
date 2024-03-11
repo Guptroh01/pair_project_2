@@ -184,10 +184,10 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
     console.log("Delete was clicked!",this.riskId)
     this.GetDataService.deleteRisk(this.riskId).subscribe(()=>{
       console.log(`risk with ${this.riskId} deleted successfully`);
+      this.displayTable()
 
     })
 
-    this.displayTable()
   }
 
   drop(event: CdkDragDrop<string[]>) {
