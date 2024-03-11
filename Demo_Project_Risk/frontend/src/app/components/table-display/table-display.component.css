@@ -103,15 +103,16 @@
 
 }
 
- .paginator{
+ .mat-paginator{
   .mat-mdc-paginator-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
-
-
-    
   }
  }
   
+ .custom-title{
+  text-align: center;
+  vertical-align: center;
+ }

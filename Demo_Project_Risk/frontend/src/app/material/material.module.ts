@@ -16,6 +16,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSelectModule, matSelectAnimations } from '@angular/material/select';
 import {MatChipsModule, MatChipInput} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu';
+import { MatTable } from '@angular/material/table';
 
 const MaterialUI = [
   MatButtonModule,
@@ -33,7 +34,7 @@ const MaterialUI = [
   MatSelectModule,
   MatDialogModule,
   MatChipsModule,
-  MatMenuModule
+  MatMenuModule,
 ];
 
 
