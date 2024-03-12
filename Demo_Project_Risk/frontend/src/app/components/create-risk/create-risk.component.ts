@@ -13,9 +13,7 @@ import {MatIconModule } from '@angular/material/icon';
 import { Risk } from 'src/app/Risk';
 import {DisplayDataService} from '../../services/display-data.service'
 import { forkJoin } from 'rxjs';
-// import { MatTableDataSource } from '@angular/material/table'
-
-// const risksData: Risk[] = [];
+import { MatChipEvent,MatChipsModule, MatChipInputEvent } from '@angular/material/chips';
 
 interface Mitigation_Risk_Score{
   value: number;
@@ -35,6 +33,7 @@ interface Mitigation_Status{
     MatInputModule,
     MatSelectModule,
     MatIconModule,  
+    MatChipsModule,
     CommonModule],
   templateUrl: './create-risk.component.html',
   styleUrls: ['./create-risk.component.css'],
