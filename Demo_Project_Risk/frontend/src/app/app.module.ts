@@ -37,6 +37,7 @@ import { BubblePaginationDirective } from './directives/bubble-pagination.direct
             CreateRiskComponent,
             MaterialModule,
             BubblePaginationDirective
+            
            ],
 
   providers: [],
