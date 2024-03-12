@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,ElementRef,OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule,ReactiveFormsModule,FormGroup,FormControl, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import {MatButtonModule} from '@angular/material/button'
@@ -13,9 +13,13 @@ import {MatIconModule } from '@angular/material/icon';
 import { Risk } from 'src/app/Risk';
 import {DisplayDataService} from '../../services/display-data.service'
 import { forkJoin } from 'rxjs';
-// import { MatTableDataSource } from '@angular/material/table'
-
-// const risksData: Risk[] = [];
+import { MatChipGrid, MatChipsModule, MatChipInputEvent } from '@angular/material/chips';
+import {MatAutocompleteSelectedEvent, MatAutocompleteModule} from '@angular/material/autocomplete';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { Observable } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {AsyncPipe} from '@angular/common';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
 
 interface Mitigation_Risk_Score{
   value: number;
@@ -34,8 +38,11 @@ interface Mitigation_Status{
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatIconModule,  
-    CommonModule],
+    MatIconModule, 
+    CommonModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+  ],
   templateUrl: './create-risk.component.html',
   styleUrls: ['./create-risk.component.css'],
   providers:[]
@@ -45,6 +52,52 @@ export class CreateRiskComponent implements OnInit{
   recordId:any;
   createRiskForm!:FormGroup;
 
+  trackByFn(index: number, item: any){
+    return item;
+  }
+
+  // new MatChips for Hazards Array
+
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  hazardCtrl = new FormControl('');
+  filteredHazards: Observable<string[]>;
+  hazards: string[] = [];
+  allHazards: string[] = [];
+
+  @ViewChild('hazardInput') hazardInput!: ElementRef<HTMLInputElement>;
+
+  announcer = inject(LiveAnnouncer);
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.hazards.push(value);
+    }
+
+    event.chipInput!.clear();
+    this.hazardCtrl.setValue(null);
+  }
+
+  remove(hazard: string): void {
+    const index = this.hazards.indexOf(hazard);
+    if (index >= 0) {
+      this.hazards.splice(index, 1);
+      this.announcer.announce(`Removed ${hazard}`);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.hazards.push(event.option.viewValue);
+    this.hazardInput.nativeElement.value = '';
+    this.hazardCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allHazards.filter(hazard => hazard.toLowerCase().includes(filterValue));
+  }
 
   mitigation_risk_scores: Mitigation_Risk_Score[] = [
     {value: 0, viewValue: 'Low'},
@@ -56,11 +109,18 @@ export class CreateRiskComponent implements OnInit{
     {value: true, viewValue: 'Open'},
     {value: false, viewValue: 'Closed'}
   ]
+
   changeEvent(event: any){
     console.log(event.value);
   }
 
-  constructor(public dialogRef: MatDialogRef<CreateRiskComponent> ,private GetDataService :GetDataService,private DisplayDataService:DisplayDataService) {}
+ constructor(public dialogRef: MatDialogRef<CreateRiskComponent> ,private GetDataService :GetDataService,private DisplayDataService:DisplayDataService) {
+            this.filteredHazards = this.hazardCtrl.valueChanges.pipe(
+            startWith(null),
+            map((hazard: string | null) => (hazard ? this._filter(hazard): this.allHazards.slice())),
+          )
+            }
+
   ngOnInit(): void {
     this.recordId = this.GetDataService.risk_id;
     console.log(this.recordId,'in create form');   
@@ -79,13 +139,13 @@ export class CreateRiskComponent implements OnInit{
   initialiseForm():void{
 
     this.createRiskForm = new FormGroup({
-      risk_category: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z, ]+$/)]),
-      hazards: new FormControl( "", [Validators.required, Validators.pattern(/^[a-zA-Z, ]+$/)]),
-      risks: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z, ]+$/)]),
+      risk_category: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
+      hazards: new FormControl( "", [Validators.required, Validators.pattern(/^[a-zA-Z, \n]+$/)]),
+      risks: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z, \n]+$/)]),
       mitigation_status: new FormControl('',Validators.required),
       pre_mitigation_risk_score : new FormControl('',Validators.required),
       post_mitigation_risk_score: new FormControl('',Validators.required),
-      barriers: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z, ]+$/)])
+      barriers: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z, \n]+$/)])
     });
     // defining the form
 
@@ -138,10 +198,7 @@ export class CreateRiskComponent implements OnInit{
         this.GetDataService.getAllRisks().subscribe((res)=>{
           
           this.DisplayDataService.updateTableData(res);
-          console.log("res in create ",res);
-
-                  
-         
+          console.log("res in create ",res); 
         })  
       },err=>{
         console.log(err)
@@ -153,10 +210,4 @@ export class CreateRiskComponent implements OnInit{
   }
 
   }
-
-
-  createRisk() {
-    console.log("Create Risk Called!",this.createRiskForm);
-  }
-
 }

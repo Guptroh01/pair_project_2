@@ -17,6 +17,7 @@ import { MatSelectModule, matSelectAnimations } from '@angular/material/select';
 import {MatChipsModule, MatChipInput} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatTable } from '@angular/material/table';
+import { MatChipGrid } from '@angular/material/chips';
 
 const MaterialUI = [
   MatButtonModule,
