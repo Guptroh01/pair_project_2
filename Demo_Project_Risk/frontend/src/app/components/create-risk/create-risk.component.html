@@ -6,14 +6,18 @@
     <mat-form-field appearance="outline" color="accent" class="custom-form-field">
         <mat-label>Risk Category</mat-label>
         <input matInput type="text" formControlName="risk_category" placeholder="Enter the Risk Category" required>
+        <mat-error *ngIf="createRiskForm.get('risk_category')?.touched && createRiskForm.get('risk_category')?.invalid" >Please Enter valid risk category</mat-error>
     </mat-form-field>
-   
+    
     <br/>
  
     <!-- <mat-form-field appearance="outline" color="accent" class="custom-form-field">
         <mat-label>Hazards</mat-label>
         <textarea matInput formControlName = "hazards" placeholder="Enter the Hazards" required></textarea>
-    </mat-form-field> -->
+
+        <mat-error *ngIf="createRiskForm.get('hazards')?.touched && createRiskForm.get('hazards')?.invalid" >Please Enter valid hazards</mat-error>
+    </mat-form-field>
+
  
     <mat-form-field appearance="outline" color="accent" class="custom-form-field">
       <mat-label>Hazards</mat-label>
@@ -41,7 +45,10 @@
     <!-- <mat-form-field appearance="outline" color="accent" class="custom-form-field">
         <mat-label>Risks</mat-label>
         <textarea matInput formControlName = "risks" placeholder="Enter the Risks" required></textarea>
-    </mat-form-field> -->
+
+        <mat-error *ngIf="createRiskForm.get('risks')?.touched && createRiskForm.get('risks')?.invalid" >Please Enter valid risk category</mat-error>
+    </mat-form-field>
+
  
     <!-- <mat-form-field appearance="outline" color="accent" class="custom-form-field">
       <mat-label>Risks</mat-label>
@@ -74,6 +81,9 @@
                 {{mitigation_status.viewValue}}
             </mat-option>
         </mat-select>
+
+        <!-- <mat-error *ngIf="createRiskForm.get('mitigation_status')?.errors " >Please Enter valid risk category</mat-error> -->
+        
     </mat-form-field>
  
  
@@ -86,6 +96,7 @@
                 {{mitigation_risk_score.viewValue}}
             </mat-option>
         </mat-select>
+        <!-- <mat-error *ngIf="createRiskForm.get('risk_category')?.touched && createRiskForm.get('risk_category')?.invalid" >Please Enter valid risk category</mat-error> -->
     </mat-form-field>
    
     <br/>
@@ -97,6 +108,7 @@
                 {{mitigation_risk_score.viewValue}}
             </mat-option>
         </mat-select>
+        <!-- <mat-error *ngIf="createRiskForm.get('risk_category')?.touched && createRiskForm.get('risk_category')?.invalid" >Please Enter valid risk category</mat-error> -->
     </mat-form-field>
    
     <br/>
@@ -104,6 +116,8 @@
     <!-- <mat-form-field appearance="outline" color="accent" class="custom-form-field">
         <mat-label>Barriers</mat-label>
         <textarea matInput formControlName = "barriers" placeholder="Enter the Barriers" required></textarea>
+
+   <mat-error *ngIf="createRiskForm.get('barriers')?.touched && createRiskForm.get('barriers')?.invalid" >Please Enter valid barriers</mat-error>
     </mat-form-field> -->
  
     <!-- <mat-form-field appearance="outline" color="accent" class="custom-form-field">
@@ -127,6 +141,7 @@
         </mat-autocomplete>
       </mat-form-field> -->
 
+
     <br/>
 
     
@@ -134,7 +149,7 @@
     <div mat-dialog-actions class="custom-dialog">
    
         <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
-        <button mat-raised-button color="primary" (click)="submitForm()" [disabled]="!createRiskForm.valid">{{isEditMode?'edit':'create'}}</button>
+        <button mat-raised-button color="primary" (click)="submitForm()" [disabled]="!createRiskForm.valid">{{isEditMode?'Edit':'Create'}}</button>
     </div>
    
    

@@ -13,13 +13,15 @@ import {MatIconModule } from '@angular/material/icon';
 import { Risk } from 'src/app/Risk';
 import {DisplayDataService} from '../../services/display-data.service'
 import { forkJoin } from 'rxjs';
-import { MatChipGrid, MatChipsModule, MatChipInputEvent } from '@angular/material/chips';
+
+import { MatChipGrid, MatChipsModule, MatChipInputEvent,MatChipEvent } from '@angular/material/chips';
 import {MatAutocompleteSelectedEvent, MatAutocompleteModule} from '@angular/material/autocomplete';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {AsyncPipe} from '@angular/common';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
+
 
 interface Mitigation_Risk_Score{
   value: number;
@@ -43,6 +45,7 @@ interface Mitigation_Status{
     MatChipsModule,
     MatAutocompleteModule,
   ],
+
   templateUrl: './create-risk.component.html',
   styleUrls: ['./create-risk.component.css'],
   providers:[]
