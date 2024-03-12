@@ -1,9 +1,14 @@
 
-
+.example-container{
+  display: flex;
+  flex-direction: column;
+  /* max-height: 500px; */
+  min-width: 300px;
+}
 
 .mat-table{
   width: 100%;
-  overflow-x: auto;
+  overflow: auto;
   border: 1px solid #E2EBE7;
   color: 
   #CF2333
@@ -29,17 +34,20 @@
 }
 
 .mat-cell,.mat-header-cell{
-  padding: 7px;
+  padding: 5px;
   box-sizing: border-box;
   
  
+}
+.customIconSize{
+  font-size: 20px;
 }
 
 
 .mat-header-cell{
   font-family: "Poppins", sans-serif;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 10px;
 }
 
 .mat-cell{
@@ -224,4 +232,23 @@
  .custom-title{
   text-align: center;
   vertical-align: center;
+ }
+
+
+ @media(max-width:920px) {
+
+  .mat-cell,.mat-header-cell{
+    padding: 3px;
+    box-sizing: border-box;
+    word-wrap: wrap;
+    word-break: break-word;
+
+    font-size: small;
+    justify-content: center;
+    overflow-wrap: break-word;
+    
+   
+  }
+
+  
  }
