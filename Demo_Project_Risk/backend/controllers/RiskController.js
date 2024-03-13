@@ -22,6 +22,7 @@ class RiskController{
     }
     async createRisk(req, res) {
         const riskData = req.body;
+        console.log(riskData);
         try {
             riskData.risks = riskData.risks.split(',').map(risk => risk.trim()).filter(risk => risk !== '');
             riskData.hazards = riskData.hazards.split(',').map(hazard => hazard.trim()).filter(hazard => hazard !== '');
@@ -39,14 +40,6 @@ class RiskController{
         console.log(req.body.risks);
         
         try {
-
-
-            console.log(riskData,"in update backend");
-            riskData.risks = riskData.risks[0].split(',').filter(risk => risk!== '');
-            riskData.hazards = riskData.hazards[0].split(',').filter(risk => risk!== '')
-            riskData.barriers = riskData.barriers[0].split(',').filter(risk => risk!== '')
-            console.log(riskData,"in update backend 332");
-
            const updatedRisk = await RiskService.updateRisk(id, riskData);
 
            if(!updatedRisk) {

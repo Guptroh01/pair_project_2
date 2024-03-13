@@ -1,25 +1,25 @@
-
-.custom-form-field{
+.custom-form-field {
     padding: 5px;
     width: 400px;
-   
-   
+
+
 }
-.custom-title{
+
+.custom-title {
     text-align: center;
     padding: 10px;
 }
- 
 
-.center-content{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  position: relative;
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    position: relative;
 }
- 
-.custom-dialog{
+
+.custom-dialog {
     position: relative;
     display: flex;
     justify-content: flex-end;
@@ -36,4 +36,3 @@
     background-color: #ebefee;
     color: #adbdb9;
 }
- 

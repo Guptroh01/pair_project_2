@@ -21,7 +21,6 @@ import { map, startWith } from 'rxjs';
   standalone: true,
 })
 export class BubblePaginationDirective implements AfterViewInit, OnChanges {
-
   @Output() pageIndexChangeEmitter: EventEmitter<number> =
     new EventEmitter<number>();
 
