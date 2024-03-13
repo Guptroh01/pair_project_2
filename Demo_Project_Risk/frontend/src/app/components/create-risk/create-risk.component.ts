@@ -133,6 +133,7 @@ export class CreateRiskComponent implements OnInit {
 
   addBarrier(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
+    const input = event.input;
 
     if (value) {
       this.barriers.push(value);
@@ -176,7 +177,7 @@ export class CreateRiskComponent implements OnInit {
   }
 
   selectedRisk(event: MatAutocompleteSelectedEvent): void {
-    this.risks.push(event.option.viewValue);
+    this.risks.push(event.option.value);
 
     this.createRiskForm.get('risks')?.setValue(this.risks);
 
@@ -293,6 +294,7 @@ export class CreateRiskComponent implements OnInit {
     });
     // defining the form
 
+
     if (this.isEditMode) {
       console.log('in edit mode', this.recordId);
       this.GetDataService.getRiskById(this.recordId).subscribe((res: any) => {
@@ -315,9 +317,11 @@ export class CreateRiskComponent implements OnInit {
     }
   }
   closeDialog(): void {
+
     this.dialogRef.close();
     this.GetDataService.editData = false;
   }
+
 
   submitForm(): void {
     const formData = this.createRiskForm.value;
@@ -338,6 +342,7 @@ export class CreateRiskComponent implements OnInit {
             console.log(err);
           }
         );
+
         this.dialogRef.close(this.closeDialog);
       } else {
         // create new risk

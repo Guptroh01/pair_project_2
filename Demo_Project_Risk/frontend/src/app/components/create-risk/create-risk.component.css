@@ -23,7 +23,16 @@
     position: relative;
     display: flex;
     justify-content: flex-end;
-    gap: .5em;
-    align-items: center;
-    margin-bottom: 15px;
+   gap: .5em;
+   align-items: center;
+   margin-bottom: 15px;
+}
+
+.submit-btn{
+    background-color: #147d64; color: white;
+}
+
+ button:disabled{
+    background-color: #ebefee;
+    color: #adbdb9;
 }
