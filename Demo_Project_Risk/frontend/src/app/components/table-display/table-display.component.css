@@ -187,6 +187,10 @@
   max-width: auto;
 
 }
+
+.mat-mdc-header-cell{
+  justify-content: center;
+}
 .mat-column-barriers{
   min-width: 5rem;
  /* border-left: 1px solid #616161; */
@@ -228,6 +232,14 @@
     margin-top: 10px;
    
   }
+
+  .mdc-text-field--outlined {
+    --mdc-outlined-text-field-outline:none;
+    --mdc-outlined-text-field-outline-width: 0px;
+    --mdc-outlined-text-field-focus-outline-width: 2px;
+    --mdc-outlined-text-field-container-shape: 4px;
+}
+
 }
   
  .custom-title{
@@ -237,21 +249,12 @@
 
 
 
- /* Lavkush expt */
-
-
  .mat-mdc-form-field.mat-warn::selected{
   color: white;
 }
 
 
-/* ::ng-deep.paginator-additional{
 
-  .mat-mdc-paginator-icon:disabled {
-      fill: red !important;
-  }
-  
-} */
 :host ::ng-deep.paginator-additional{
 
   .mat-mdc-paginator-icon {
@@ -266,13 +269,10 @@
 
 
 .paginator {
-  /* color: #FFFFFF; */
-  /* color: red; */
+ 
 
   .mat-mdc-form-field {
-      /* border-right: 1px solid #414141;
-      border-left: 1px solid #414141;
-      border-top: 1px solid #414141; */
+     
       border-bottom: 1px solid white;
       
       
@@ -318,15 +318,6 @@
 
 }
 
-
-
-
-.mat-paginator-sticky {
-
-  .mat-mdc-select{
-      color: white;
-  }
-}
 
 
 
