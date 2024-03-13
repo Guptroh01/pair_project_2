@@ -67,19 +67,19 @@ export class CreateRiskComponent implements OnInit{
     hazards: string[] = [];
     allHazards: string[] = [];
 
-    // riskCtrl = new FormControl('');
-    // filteredRisks: Observable<string[]>;
-    // risks: string[] = [];
-    // allRisks: string[] = [];
+    riskCtrl = new FormControl('');
+    filteredRisks: Observable<string[]>;
+    risks: string[] = [];
+    allRisks: string[] = [];
 
-    // barrierCtrl = new FormControl('');
-    // filteredBarriers: Observable<string[]>;
-    // barriers: string[] = [];
-    // allBarriers: string[] = [];
+    barrierCtrl = new FormControl('');
+    filteredBarriers: Observable<string[]>;
+    barriers: string[] = [];
+    allBarriers: string[] = [];
     
 @ViewChild('hazardInput') hazardInput!: ElementRef<HTMLInputElement>;
-// @ViewChild('riskInput') riskInput!: ElementRef<HTMLInputElement>;
-// @ViewChild('barrierInput') barrierInput!: ElementRef<HTMLInputElement>;
+@ViewChild('riskInput') riskInput!: ElementRef<HTMLInputElement>;
+@ViewChild('barrierInput') barrierInput!: ElementRef<HTMLInputElement>;
 
   announcer = inject(LiveAnnouncer);
 
@@ -88,33 +88,36 @@ export class CreateRiskComponent implements OnInit{
 
     if (value) {
       this.hazards.push(value);
+      this.createRiskForm.get('hazards')?.setValue(this.hazards);
       }
 
     event.chipInput!.clear();
     this.hazardCtrl.setValue(null);
   }
 
-  // addRisk(event: MatChipInputEvent): void {
-  //   const value = (event.value || '').trim();
+  addRisk(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
 
-  //   if (value) {
-  //     this.risks.push(value);
-  //     }
+    if (value) {
+      this.risks.push(value);
+      this.createRiskForm.get('risks')?.setValue(this.risks);
+      }
 
-  //   event.chipInput!.clear();
-  //   this.riskCtrl.setValue(null);
-  // }
+    event.chipInput!.clear();
+    this.riskCtrl.setValue(null);
+  }
 
-  // addBarrier(event: MatChipInputEvent): void {
-  //   const value = (event.value || '').trim();
+  addBarrier(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
 
-  //   if (value) {
-  //     this.barriers.push(value);
-  //     }
+    if (value) {
+      this.barriers.push(value);
+      this.createRiskForm.get('barriers')?.setValue(this.barriers);
+      }
 
-  //   event.chipInput!.clear();
-  //   this.barrierCtrl.setValue(null);
-  // }
+    event.chipInput!.clear();
+    this.barrierCtrl.setValue(null);
+  }
 
   removeHazard(hazard: string): void {
     const index = this.hazards.indexOf(hazard);
@@ -124,56 +127,59 @@ export class CreateRiskComponent implements OnInit{
     }
   }
 
-  // removeRisk(risk: string): void {
-  //   const index = this.risks.indexOf(risk);
-  //   if (index >= 0) {
-  //     this.risks.splice(index, 1);
-  //     this.announcer.announce(`Removed ${risk}`);
-  //   }
-  // }
+  removeRisk(risk: string): void {
+    const index = this.risks.indexOf(risk);
+    if (index >= 0) {
+      this.risks.splice(index, 1);
+      this.announcer.announce(`Removed ${risk}`);
+    }
+  }
 
-  // removeBarrier(barrier: string): void {
-  //   const index = this.barriers.indexOf(barrier);
-  //   if (index >= 0) {
-  //     this.barriers.splice(index, 1);
-  //     this.announcer.announce(`Removed ${barrier}`);
-  //   }
-  // }
+  removeBarrier(barrier: string): void {
+    const index = this.barriers.indexOf(barrier);
+    if (index >= 0) {
+      this.barriers.splice(index, 1);
+      this.announcer.announce(`Removed ${barrier}`);
+    }
+  }
 
   selectedHazard(event: MatAutocompleteSelectedEvent): void {
     this.hazards.push(event.option.viewValue);
+    this.createRiskForm.get('hazards')?.setValue(this.hazards);
     this.hazardInput.nativeElement.value = '';
     this.hazardCtrl.setValue(null);
   }
 
-  // selectedRisk(event: MatAutocompleteSelectedEvent): void {
-  //   this.risks.push(event.option.viewValue);
-  //   this.riskInput.nativeElement.value = '';
-  //   this.riskCtrl.setValue(null);
-  // }
+  selectedRisk(event: MatAutocompleteSelectedEvent): void {
+    this.risks.push(event.option.viewValue);
+    this.createRiskForm.get('risks')?.setValue(this.risks);
+    this.riskInput.nativeElement.value = '';
+    this.riskCtrl.setValue(null);
+  }
 
-  // selectedBarrier(event: MatAutocompleteSelectedEvent): void {
-  //   this.barriers.push(event.option.viewValue);
-  //   this.barrierInput.nativeElement.value = '';
-  //   this.barrierCtrl.setValue(null);
-  // }
+  selectedBarrier(event: MatAutocompleteSelectedEvent): void {
+    this.barriers.push(event.option.viewValue);
+    this.createRiskForm.get('barriers')?.setValue(this.barriers);
+    this.barrierInput.nativeElement.value = '';
+    this.barrierCtrl.setValue(null);
+  }
 
   private _filterHazard(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.allHazards.filter(hazard => hazard.toLowerCase().includes(filterValue));
   }
 
-  // private _filterRisk(value: string): string[] {
-  //   const filterValue = value.toLowerCase();
+  private _filterRisk(value: string): string[] {
+    const filterValue = value.toLowerCase();
 
-  //   return this.allRisks.filter(risk => risk.toLowerCase().includes(filterValue));
-  // }
+    return this.allRisks.filter(risk => risk.toLowerCase().includes(filterValue));
+  }
 
-  // private _filterBarrier(value: string): string[] {
-  //   const filterValue = value.toLowerCase();
+  private _filterBarrier(value: string): string[] {
+    const filterValue = value.toLowerCase();
 
-  //   return this.allBarriers.filter(barrier => barrier.toLowerCase().includes(filterValue));
-  // }
+    return this.allBarriers.filter(barrier => barrier.toLowerCase().includes(filterValue));
+  }
 
   mitigation_risk_scores: Mitigation_Risk_Score[] = [
     {value: 0, viewValue: 'Low'},
@@ -194,17 +200,17 @@ export class CreateRiskComponent implements OnInit{
             this.filteredHazards = this.hazardCtrl.valueChanges.pipe(
             startWith(null),
             map((hazard: string | null) => (hazard ? this._filterHazard(hazard): this.allHazards.slice())),
+          ),
+
+          this.filteredRisks = this.riskCtrl.valueChanges.pipe(
+            startWith(null),
+            map((risk: string | null) => (risk ? this._filterRisk(risk): this.allRisks.slice())),
+          ),
+
+          this.filteredBarriers = this.barrierCtrl.valueChanges.pipe(
+            startWith(null),
+            map((barrier: string | null) => (barrier ? this._filterBarrier(barrier): this.allBarriers.slice())),
           )
-
-          // this.filteredRisks = this.riskCtrl.valueChanges.pipe(
-          //   startWith(null),
-          //   map((risk: string | null) => (risk ? this._filterRisk(risk): this.allRisks.slice())),
-          // ),
-
-          // this.filteredBarriers = this.barrierCtrl.valueChanges.pipe(
-          //   startWith(null),
-          //   map((barrier: string | null) => (barrier ? this._filterBarrier(barrier): this.allBarriers.slice())),
-          // )
             }
 
   ngOnInit(): void {
@@ -290,7 +296,7 @@ export class CreateRiskComponent implements OnInit{
         console.log(err)
       })
     }
-   
+   console.log(this.createRiskForm.value, "REEEE");
     this.dialogRef.close(this.createRiskForm.value);
     // this.closeDialog()
   }
