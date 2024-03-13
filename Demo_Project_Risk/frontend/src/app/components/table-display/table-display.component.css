@@ -1,9 +1,14 @@
 
-
+.example-container{
+  display: flex;
+  flex-direction: column;
+  /* max-height: 500px; */
+  min-width: 300px;
+}
 
 .mat-table{
   width: 100%;
-  overflow-x: auto;
+  overflow: auto;
   border: 1px solid #E2EBE7;
   color: 
   #CF2333
@@ -29,17 +34,20 @@
 }
 
 .mat-cell,.mat-header-cell{
-  padding: 7px;
+  padding: 5px;
   box-sizing: border-box;
   
  
+}
+.customIconSize{
+  font-size: 20px;
 }
 
 
 .mat-header-cell{
   font-family: "Poppins", sans-serif;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 10px;
 }
 
 .mat-cell{
@@ -212,16 +220,130 @@
   
 }
 
- .mat-paginator{
+.paginator{ 
   .mat-mdc-paginator-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
+   
   }
- }
+}
   
  .custom-title{
   text-align: center;
   vertical-align: center;
+ }
+
+
+
+ /* Lavkush expt */
+
+
+ .mat-mdc-form-field.mat-warn::selected{
+  color: white;
+}
+
+
+/* ::ng-deep.paginator-additional{
+
+  .mat-mdc-paginator-icon:disabled {
+      fill: red !important;
+  }
+  
+} */
+:host ::ng-deep.paginator-additional{
+
+  .mat-mdc-paginator-icon {
+      fill: #757575 ;
+
+  }
+
+  
+
+  
+}
+
+
+.paginator {
+  /* color: #FFFFFF; */
+  /* color: red; */
+
+  .mat-mdc-form-field {
+      /* border-right: 1px solid #414141;
+      border-left: 1px solid #414141;
+      border-top: 1px solid #414141; */
+      border-bottom: 1px solid white;
+      
+      
+  }
+  .mat-mdc-select-arrow svg{
+      /* fill: lightgrey; */
+      fill:#000;
+  }
+  /* ::ng-deep .mat-mdc-paginator-container{
+       display: flex;
+      justify-content: space-between;
+       
+  } */
+
+
+}
+  
+
+
+::ng-deep .mat-mdc-paginator-page-size-label{
+  /* for items per page color */
+  color:#000;
+  
+}
+
+
+
+::ng-deep .mat-mdc-paginator-outer-container {
+  background-color: white; 
+  display: flex;
+  /* background-color: green; */
+  color: #FFFFFF;
+  width: 100%;
+  justify-content: space-between;
+
+  .mat-mdc-paginator-range-label{
+    /* background-color: green; */
+    color: #000;
+    position: absolute !important;
+    left: 210px !important;
+
+  }
+
+}
+
+
+
+
+.mat-paginator-sticky {
+
+  .mat-mdc-select{
+      color: white;
+  }
+}
+
+
+
+ @media(max-width:920px) {
+
+  .mat-cell,.mat-header-cell{
+    padding: 3px;
+    box-sizing: border-box;
+    word-wrap: wrap;
+    word-break: break-word;
+
+    font-size: small;
+    justify-content: center;
+    overflow-wrap: break-word;
+    
+   
+  }
+
+  
  }
