@@ -1,119 +1,101 @@
-
-.example-container{
+.example-container {
   display: flex;
   flex-direction: column;
-  /* max-height: 500px; */
   min-width: 300px;
 }
 
-.mat-table{
+.mat-table {
   width: 100%;
   overflow: auto;
   border: 1px solid #E2EBE7;
-  color: 
-  #CF2333
-  
-  #F4DD33
-  
-  #02A783
-  
-  #FAFAFA
-  
-  #EBEFEE
-  
-  #E50012;
-  
+  color:
+    #CF2333 #F4DD33 #02A783 #FAFAFA #EBEFEE #E50012;
+
   /* #FFD800 paginator page color
   
   #616161 inside text color
   
   #1A2321; header text color */
-  
-
-
 }
 
-.mat-cell,.mat-header-cell{
+.mat-cell,
+.mat-header-cell {
   padding: 5px;
   box-sizing: border-box;
-  
- 
 }
-.customIconSize{
+
+.customIconSize {
   font-size: 20px;
 }
 
-
-.mat-header-cell{
+.mat-header-cell {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-size: 10px;
 }
 
-.mat-cell{
+.mat-cell {
   font-family: "Noto Sans", sans-serif;
   font-weight: 400;
-
 }
-.mat-header-row{
+
+.mat-header-row {
   background-color: #f5f5f5;
-
 }
 
-.mat-row:nth-child(even){
+.mat-row:nth-child(even) {
   background-color: #fafafa;
 }
 
-.mat-paginator{
+.mat-paginator {
   margin-top: 20px;
 }
 
-
-.mat-header-cell mat-icon,.mat-cell mat-icon{
+.mat-header-cell mat-icon,
+.mat-cell mat-icon {
   cursor: move;
 }
 
-.mat-cell button{
+.mat-cell button {
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
-.mat-cell button mat-icon{
+.mat-cell button mat-icon {
   color: #757575;
 }
-.mat-chip-color{
 
-  .mat-mdc-standard-chip{
+.mat-chip-color {
+  .mat-mdc-standard-chip {
     background: #d8dbdb;
-  
-
   }
   /* background: #d8dbdb;
   color:#616161 ; */
 }
 
-
-.mat-menu-item{
+.mat-menu-item {
   padding: 5px 10px;
   background: #CF2333;
 }
 
-.mat-menu-item:hover{
- /* background: #f5f5f5; */
- background: #CF2333;
+.mat-menu-item:hover {
+  /* background: #f5f5f5; */
+  background: #CF2333;
 }
 
-.mat-mdc-header-cell{
+.mat-mdc-header-cell {
   padding: auto;
   justify-content: center;
 }
-.mat-mdc-header-cell,.mat-mdc-cell{
+
+.mat-mdc-header-cell,
+.mat-mdc-cell {
   width: fit-content;
   min-width: auto;
   background: transparent;
   text-wrap: wrap;
-  
+
   border: 1px solid #E2EBE7;
   text-align: center;
   justify-content: center;
@@ -121,220 +103,173 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   width: fit-content;
-
-  
-
 }
 
-.mat-mdc-header-cell{
+.mat-mdc-header-cell {
   display: flex;
-  font-size: 15px;
+  font-size: 12px;
   align-self: normal;
   justify-content: left;
 }
 
-.mat-mdc-cell{
+.mat-mdc-cell {
   margin-left: 0;
   overflow-wrap: break-word;
   text-overflow: ellipsis;
   word-break: break-word;
   /* justify-content: flex-start; */
-  
 }
 
-
-.mitigation_status{
+.mitigation_status {
   display: flex;
   /* justify-content: center; */
   font-size: 15px;
   align-self: center;
 }
 
-
 .mat-table .mat-header-cell:last-child,
-.mat-table .mat-cell:last-child{
+.mat-table .mat-cell:last-child {
   width: 10px;
 }
 
-.mat-column-risk_id{
+.mat-column-risk_id {
   max-width: 85px;
   /* text-wrap: wrap; */
   width: max-content;
 }
 
-.mat-column-risk_category{
+.mat-column-risk_category {
   max-width: 110px;
   text-wrap: wrap;
-  word-wrap: break-word !important; 
+  word-wrap: break-word !important;
   overflow-wrap: break-word;
-  white-space:normal;
+  white-space: normal;
   /* flex:0 0 28%; */
   /* overflow: hidden; */
   text-overflow: ellipsis;
   justify-self: center;
- 
 }
 
-
-
-
-.mat-column-risks
-,.mat-column-hazards,.mat-column-barriers{
+.mat-column-risks,
+.mat-column-hazards,
+.mat-column-barriers {
   justify-content: left;
- 
   width: fit-content;
   text-align: left;
   max-width: auto;
-
 }
 
-.mat-mdc-header-cell{
+.mat-mdc-header-cell {
   justify-content: center;
 }
-.mat-column-barriers{
+
+.mat-column-barriers {
   min-width: 5rem;
- /* border-left: 1px solid #616161; */
-
-
+  /* border-left: 1px solid #616161; */
 }
 
-.mat-column-update{
+.mat-column-update {
   max-width: 65px;
   /* background: #000; */
-
   justify-content: flex-center;
-
-
 }
-.mat-column-pre_mitigation_risk_score, .mat-column-post_mitigation_risk_score{
+
+.mat-column-pre_mitigation_risk_score,
+.mat-column-post_mitigation_risk_score {
   width: fit-content;
   text-overflow: ellipsis;
   word-break: break-word;
   display: flex;
   /* justify-content: center; */
- 
 }
 
-.mat-column-hazards{
+.mat-column-hazards {
   /* min-width: fit-content; */
   width: max-content;
   text-wrap: wrap;
   word-wrap: break-word;
   max-height: fit-content;
-  
 }
 
-.paginator{ 
-  .mat-mdc-paginator-container{
+.paginator {
+  .mat-mdc-paginator-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
-   
   }
 
   .mdc-text-field--outlined {
-    --mdc-outlined-text-field-outline:none;
+    --mdc-outlined-text-field-outline: none;
     --mdc-outlined-text-field-outline-width: 0px;
     --mdc-outlined-text-field-focus-outline-width: 2px;
     --mdc-outlined-text-field-container-shape: 4px;
+  }
 }
 
-}
-  
- .custom-title{
+.custom-title {
   text-align: center;
   vertical-align: center;
- }
+}
 
-
-
- .mat-mdc-form-field.mat-warn::selected{
+.mat-mdc-form-field.mat-warn::selected {
   color: white;
 }
 
-
-
-:host ::ng-deep.paginator-additional{
+:host ::ng-deep.paginator-additional {
 
   .mat-mdc-paginator-icon {
-      fill: #757575 ;
-
+    fill: #757575;
   }
-
-  
-
-  
 }
 
-
 .paginator {
- 
-
   .mat-mdc-form-field {
-     
-      border-bottom: 1px solid white;
-      
-      
+    border-bottom: 1px solid white;
   }
-  .mat-mdc-select-arrow svg{
-      /* fill: lightgrey; */
-      fill:#000;
+
+  .mat-mdc-select-arrow svg {
+    /* fill: lightgrey; */
+    fill: #000;
   }
+
   /* ::ng-deep .mat-mdc-paginator-container{
        display: flex;
       justify-content: space-between;
        
   } */
-
-
 }
-  
 
-
-::ng-deep .mat-mdc-paginator-page-size-label{
+::ng-deep .mat-mdc-paginator-page-size-label {
   /* for items per page color */
-  color:#000;
-  
+  color: #000;
 }
-
-
 
 ::ng-deep .mat-mdc-paginator-outer-container {
-  background-color: white; 
+  background-color: white;
   display: flex;
   /* background-color: green; */
   color: #FFFFFF;
   width: 100%;
   justify-content: space-between;
 
-  .mat-mdc-paginator-range-label{
+  .mat-mdc-paginator-range-label {
     /* background-color: green; */
     color: #000;
     position: absolute !important;
     left: 210px !important;
-
   }
-
 }
 
-
-
-
- @media(max-width:920px) {
-
-  .mat-cell,.mat-header-cell{
+@media(max-width:920px) {
+  .mat-cell,
+  .mat-header-cell {
     padding: 3px;
     box-sizing: border-box;
     word-wrap: wrap;
     word-break: break-word;
-
     font-size: small;
     justify-content: center;
     overflow-wrap: break-word;
-    
-   
   }
-
-  
- }
+}

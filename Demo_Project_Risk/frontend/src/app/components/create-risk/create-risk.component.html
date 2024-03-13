@@ -1,50 +1,93 @@
 <div class="container">
-<h2 mat-dialog-title class="custom-title"> {{isEditMode?'Edit Risk':'Create Risk'}} </h2>
-<div mat-dialog-content class="center-content">
-<form [formGroup]="createRiskForm">
-    
-    <mat-form-field appearance="outline" color="accent" class="custom-form-field">
+  <h2 mat-dialog-title class="custom-title">
+    {{ isEditMode ? "Edit Risk" : "Create Risk" }}
+  </h2>
+  <div mat-dialog-content class="center-content">
+    <form [formGroup]="createRiskForm">
+      <mat-form-field
+        appearance="outline"
+        color="accent"
+        class="custom-form-field"
+      >
         <mat-label>Risk Category</mat-label>
-        <input matInput type="text" formControlName="risk_category" placeholder="Enter the Risk Category" required>
-        <mat-error *ngIf="createRiskForm.get('risk_category')?.touched && createRiskForm.get('risk_category')?.invalid" >Please Enter valid risk category</mat-error>
-    </mat-form-field>
-    
-    <br/>
- 
-    <!-- <mat-form-field appearance="outline" color="accent" class="custom-form-field">
+        <input
+          matInput
+          type="text"
+          formControlName="risk_category"
+          placeholder="Enter the Risk Category"
+          required
+        />
+        <mat-error
+          *ngIf="
+            createRiskForm.get('risk_category')?.touched &&
+            createRiskForm.get('risk_category')?.invalid
+          "
+          >Please Enter valid risk category</mat-error
+        >
+      </mat-form-field>
+
+      <br />
+
+      <!-- <mat-form-field appearance="outline" color="accent" class="custom-form-field">
         <mat-label>Hazards</mat-label>
         <textarea matInput formControlName = "hazards" placeholder="Enter the Hazards" required></textarea>
 
         <mat-error *ngIf="createRiskForm.get('hazards')?.touched && createRiskForm.get('hazards')?.invalid" >Please Enter valid hazards</mat-error>
     </mat-form-field> -->
 
- 
-    <mat-form-field appearance="outline" color="accent" class="custom-form-field">
-      <mat-label>Hazards</mat-label>
+      <mat-form-field
+        appearance="outline"
+        color="accent"
+        class="custom-form-field"
+      >
+        <mat-label>Hazards</mat-label>
         <mat-chip-grid #chipGridHazard aria-label="hazard-selection">
-            <mat-chip-row *ngFor="let hazard of hazards" (removed)="removeHazard(hazard)">
-              {{hazard}}
-              <button matChipRemove [attr.aria-label]="'remove ' + hazard">
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip-row>
-       
-        <input matInput type="text" placeholder="Enter your Hazards" #hazardInput formControlName="hazards"
+          <mat-chip-row
+            *ngFor="let hazard of hazards"
+            (removed)="removeHazard(hazard)"
+          >
+            {{ hazard }}
+            <button matChipRemove [attr.aria-label]="'remove ' + hazard">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
 
-          [matChipInputFor]="chipGridHazard" [matAutocomplete]="auto"
-
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="addHazard($event)"required/>
-
+          <input
+            matInput
+            type="text"
+            placeholder="Enter your Hazards"
+            #hazardInput
+            formControlName="hazards"
+            [matChipInputFor]="chipGridHazard"
+            [matAutocomplete]="auto"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="addHazard($event)"
+            required
+          />
         </mat-chip-grid>
-       
-        <mat-error *ngIf="createRiskForm.get('hazards')?.touched && createRiskForm.get('hazards')?.invalid" >Please Enter valid hazards</mat-error>
-        </mat-form-field>
 
-    <br/>
- 
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selectedHazard($event)"
+        >
+          <ng-container
+            *ngFor="let hazard of filteredHazards | async; trackBy: trackByFn"
+          >
+            <mat-option [value]="hazard">{{ hazard }}</mat-option>
+          </ng-container>
+        </mat-autocomplete>
+        <mat-error
+          *ngIf="
+            createRiskForm.get('hazards')?.touched &&
+            createRiskForm.get('hazards')?.invalid
+          "
+          >Please Enter valid hazards</mat-error
+        >
+      </mat-form-field>
 
-     <!-- <mat-form-field appearance="outline" color="accent" class="custom-form-field">
+      <br />
+
+      <!-- <mat-form-field appearance="outline" color="accent" class="custom-form-field">
 
         <mat-label>Risks</mat-label>
         <textarea matInput formControlName = "risks" placeholder="Enter the Risks" required></textarea>
@@ -52,117 +95,197 @@
         <mat-error *ngIf="createRiskForm.get('risks')?.touched && createRiskForm.get('risks')?.invalid" >Please Enter valid risk category</mat-error>
     </mat-form-field> -->
 
- 
-    <mat-form-field appearance="outline" color="accent" class="custom-form-field">
-      <mat-label>Risks</mat-label>
+      <mat-form-field
+        appearance="outline"
+        color="accent"
+        class="custom-form-field"
+      >
+        <mat-label>Risks</mat-label>
         <mat-chip-grid #chipGridRisk aria-label="risk-selection">
-            <mat-chip-row *ngFor="let risk of risks" (removed)="removeRisk(risk)">
-              {{risk}}
-              <button matChipRemove [attr.aria-label]="'remove ' + risk">
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip-row>
-
+          <mat-chip-row *ngFor="let risk of risks" (removed)="removeRisk(risk)">
+            {{ risk }}
+            <button matChipRemove [attr.aria-label]="'remove ' + risk">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
         </mat-chip-grid>
-        <input matInput type="text" placeholder="Enter your Risks" #riskInput formControlName="risks"
-          [matChipInputFor]="chipGridRisk" [matAutocomplete]="auto"
+        <input
+          matInput
+          type="text"
+          placeholder="Enter your Risks"
+          #riskInput
+          formControlName="risks"
+          [matChipInputFor]="chipGridRisk"
+          [matAutocomplete]="auto"
           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="addRisk($event)"required/>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedRisk($event)">
-            <ng-container *ngFor="let risk of filteredRisks | async; trackBy: trackByFn">
-            <mat-option [value]="risk">{{risk}}</mat-option>
+          (matChipInputTokenEnd)="addRisk($event)"
+          required
+        />
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selectedRisk($event)"
+        >
+          <ng-container
+            *ngFor="let risk of filteredRisks | async; trackBy: trackByFn"
+          >
+            <mat-option [value]="risk">{{ risk }}</mat-option>
           </ng-container>
         </mat-autocomplete>
 
-        <mat-error *ngIf="createRiskForm.get('risks')?.touched && createRiskForm.get('risks')?.invalid" >Please Enter valid risk category</mat-error>
+        <mat-error
+          *ngIf="
+            createRiskForm.get('risks')?.touched &&
+            createRiskForm.get('risks')?.invalid
+          "
+          >Please Enter valid risk category</mat-error
+        >
       </mat-form-field>
 
-    <br/>
- 
-    <mat-form-field class="custom-form-field">
+      <br />
+
+      <mat-form-field class="custom-form-field">
         <mat-label>Mitigation Status</mat-label>
- 
-        <mat-select formControlName = "mitigation_status" (change) = "changeEvent($event)">
-            <mat-option *ngFor="let mitigation_status of mitigation_status" [value]="mitigation_status.value">
-                {{mitigation_status.viewValue}}
-            </mat-option>
+
+        <mat-select
+          formControlName="mitigation_status"
+          (change)="changeEvent($event)"
+        >
+          <mat-option
+            *ngFor="let mitigation_status of mitigation_status"
+            [value]="mitigation_status.value"
+          >
+            {{ mitigation_status.viewValue }}
+          </mat-option>
         </mat-select>
 
-        <mat-error *ngIf="createRiskForm.get('mitigation_status')?.errors " >Please Enter valid risk category</mat-error>
-        
-    </mat-form-field>
- 
- 
-    <br/>
+        <mat-error *ngIf="createRiskForm.get('mitigation_status')?.errors"
+          >Please Enter valid risk category</mat-error
+        >
+      </mat-form-field>
 
-    <mat-form-field class="custom-form-field"> 
+      <br />
+
+      <mat-form-field class="custom-form-field">
         <mat-label>Pre-Mitigation Risk Score</mat-label>
-        <mat-select formControlName = "pre_mitigation_risk_score" (change) = "changeEvent($event)">
-            <mat-option *ngFor="let mitigation_risk_score of mitigation_risk_scores" [value]="mitigation_risk_score.value">
-                {{mitigation_risk_score.viewValue}}
-            </mat-option>
+        <mat-select
+          formControlName="pre_mitigation_risk_score"
+          (change)="changeEvent($event)"
+        >
+          <mat-option
+            *ngFor="let mitigation_risk_score of mitigation_risk_scores"
+            [value]="mitigation_risk_score.value"
+          >
+            {{ mitigation_risk_score.viewValue }}
+          </mat-option>
         </mat-select>
-        <mat-error *ngIf="createRiskForm.get('pre_mitigation_risk_score')?.touched && createRiskForm.get('pre_mitigation_risk_score')?.invalid" >Please Enter valid risk category</mat-error>
-    </mat-form-field>
-   
-    <br/>
+        <mat-error
+          *ngIf="
+            createRiskForm.get('pre_mitigation_risk_score')?.touched &&
+            createRiskForm.get('pre_mitigation_risk_score')?.invalid
+          "
+          >Please Enter valid risk category</mat-error
+        >
+      </mat-form-field>
 
-    <mat-form-field class="custom-form-field"> 
+      <br />
+
+      <mat-form-field class="custom-form-field">
         <mat-label>Post-Mitigation Risk Score</mat-label>
-        <mat-select formControlName = "post_mitigation_risk_score" (change) = "changeEvent($event)">
-            <mat-option *ngFor="let mitigation_risk_score of mitigation_risk_scores" [value]="mitigation_risk_score.value">
-                {{mitigation_risk_score.viewValue}}
-            </mat-option>
+        <mat-select
+          formControlName="post_mitigation_risk_score"
+          (change)="changeEvent($event)"
+        >
+          <mat-option
+            *ngFor="let mitigation_risk_score of mitigation_risk_scores"
+            [value]="mitigation_risk_score.value"
+          >
+            {{ mitigation_risk_score.viewValue }}
+          </mat-option>
         </mat-select>
-        <mat-error *ngIf="createRiskForm.get('post_mitigation_risk_score')?.touched && createRiskForm.get('post_mitigation_risk_score')?.invalid" >Please Enter valid risk category</mat-error>
-    </mat-form-field>
-   
-    <br/>
-<!--  
+        <mat-error
+          *ngIf="
+            createRiskForm.get('post_mitigation_risk_score')?.touched &&
+            createRiskForm.get('post_mitigation_risk_score')?.invalid
+          "
+          >Please Enter valid risk category</mat-error
+        >
+      </mat-form-field>
+
+      <br />
+      <!--  
     <mat-form-field appearance="outline" color="accent" class="custom-form-field">
         <mat-label>Barriers</mat-label>
         <textarea matInput formControlName = "barriers" placeholder="Enter the Barriers" required></textarea>
 
    <mat-error *ngIf="createRiskForm.get('barriers')?.touched && createRiskForm.get('barriers')?.invalid" >Please Enter valid barriers</mat-error>
     </mat-form-field> -->
- 
-    <mat-form-field appearance="outline" color="accent" class="custom-form-field">
-      <mat-label>Barriers</mat-label>
+
+      <mat-form-field
+        appearance="outline"
+        color="accent"
+        class="custom-form-field"
+      >
+        <mat-label>Barriers</mat-label>
 
         <mat-chip-grid #chipGridBarrier aria-label="barrier-selection">
-
-            <mat-chip-row *ngFor="let barrier of barriers" (removed)="removeBarrier(barrier)">
-              {{barrier}}
-              <button matChipRemove [attr.aria-label]="'remove ' + barrier">
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip-row>
+          <mat-chip-row
+            *ngFor="let barrier of barriers"
+            (removed)="removeBarrier(barrier)"
+          >
+            {{ barrier }}
+            <button matChipRemove [attr.aria-label]="'remove ' + barrier">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
         </mat-chip-grid>
 
-        <input matInput type="text" placeholder="Enter your Barriers" #hazardInput formControlName="barriers"
-          [matChipInputFor]="chipGridBarrier" [matAutocomplete]="auto"
-
+        <input
+          matInput
+          type="text"
+          placeholder="Enter your Barriers"
+          #hazardInput
+          formControlName="barriers"
+          [matChipInputFor]="chipGridBarrier"
+          [matAutocomplete]="auto"
           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="addBarrier($event)"required/>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedBarrier($event)">
-            <ng-container *ngFor="let barrier of filteredBarriers | async; trackBy: trackByFn">
-            <mat-option [value]="barrier">{{barrier}}</mat-option>
+          (matChipInputTokenEnd)="addBarrier($event)"
+          required
+        />
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selectedBarrier($event)"
+        >
+          <ng-container
+            *ngFor="let barrier of filteredBarriers | async; trackBy: trackByFn"
+          >
+            <mat-option [value]="barrier">{{ barrier }}</mat-option>
           </ng-container>
         </mat-autocomplete>
 
-        <mat-error *ngIf="createRiskForm.get('barriers')?.touched && createRiskForm.get('barriers')?.invalid" >Please Enter valid barriers</mat-error>
-        </mat-form-field>
+        <mat-error
+          *ngIf="
+            createRiskForm.get('barriers')?.touched &&
+            createRiskForm.get('barriers')?.invalid
+          "
+          >Please Enter valid barriers</mat-error
+        >
+      </mat-form-field>
 
-    <br/>
+      <br />
 
-    <div mat-dialog-actions class="custom-dialog">
-   
-        <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
-        <button mat-raised-button color="primary" (click)="submitForm()" [disabled]="!createRiskForm.valid">{{isEditMode?'Edit':'Create'}}</button>
-    </div>
-   
-   
-</form>
-</div>
- 
+      <div mat-dialog-actions class="custom-dialog">
+        <button mat-raised-button color="warn" (click)="closeDialog()">
+          Cancel
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="submitForm()"
+          [disabled]="!createRiskForm.valid"
+        >
+          {{ isEditMode ? "Edit" : "Create" }}
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
