@@ -88,6 +88,7 @@ export class CreateRiskComponent implements OnInit{
 
     if (value) {
       this.hazards.push(value);
+      this.createRiskForm.get('hazards')?.setValue(this.hazards);
       }
 
     event.chipInput!.clear();
@@ -99,6 +100,9 @@ export class CreateRiskComponent implements OnInit{
 
     if (value) {
       this.risks.push(value);
+
+      this.createRiskForm.get('risks')?.setValue(this.risks);
+
       }
 
     event.chipInput!.clear();
@@ -110,6 +114,9 @@ export class CreateRiskComponent implements OnInit{
 
     if (value) {
       this.barriers.push(value);
+
+      this.createRiskForm.get('barriers')?.setValue(this.barriers);
+
       }
 
     event.chipInput!.clear();
@@ -142,18 +149,25 @@ export class CreateRiskComponent implements OnInit{
 
   selectedHazard(event: MatAutocompleteSelectedEvent): void {
     this.hazards.push(event.option.viewValue);
+    this.createRiskForm.get('hazards')?.setValue(this.hazards);
     this.hazardInput.nativeElement.value = '';
     this.hazardCtrl.setValue(null);
   }
 
   selectedRisk(event: MatAutocompleteSelectedEvent): void {
     this.risks.push(event.option.viewValue);
+
+    this.createRiskForm.get('risks')?.setValue(this.risks);
+
     this.riskInput.nativeElement.value = '';
     this.riskCtrl.setValue(null);
   }
 
   selectedBarrier(event: MatAutocompleteSelectedEvent): void {
     this.barriers.push(event.option.viewValue);
+
+    this.createRiskForm.get('barriers')?.setValue(this.barriers);
+
     this.barrierInput.nativeElement.value = '';
     this.barrierCtrl.setValue(null);
   }
@@ -205,7 +219,9 @@ export class CreateRiskComponent implements OnInit{
             startWith(null),
             map((barrier: string | null) => (barrier ? this._filterBarrier(barrier): this.allBarriers.slice())),
           )
-      }
+
+     }
+
 
   ngOnInit(): void {
     this.recordId = this.GetDataService.risk_id;
@@ -290,7 +306,7 @@ export class CreateRiskComponent implements OnInit{
         console.log(err)
       })
     }
-   
+   console.log(this.createRiskForm.value, "REEEE");
     this.dialogRef.close(this.createRiskForm.value);
     // this.closeDialog()
   }
