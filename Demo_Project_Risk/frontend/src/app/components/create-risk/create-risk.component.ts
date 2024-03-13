@@ -111,13 +111,14 @@ export class CreateRiskComponent implements OnInit{
 
   addBarrier(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
+    const input = event.input;
 
     if (value) {
       this.barriers.push(value);
 
       this.createRiskForm.get('barriers')?.setValue(this.barriers);
 
-      }
+    }
 
     event.chipInput!.clear();
     this.barrierCtrl.setValue(null);
@@ -155,7 +156,7 @@ export class CreateRiskComponent implements OnInit{
   }
 
   selectedRisk(event: MatAutocompleteSelectedEvent): void {
-    this.risks.push(event.option.viewValue);
+    this.risks.push(event.option.value);
 
     this.createRiskForm.get('risks')?.setValue(this.risks);
 
@@ -251,16 +252,34 @@ export class CreateRiskComponent implements OnInit{
     });
     // defining the form
 
-
-
     if(this.isEditMode){
       console.log('in edit mode',this.recordId)
       this.GetDataService.getRiskById(this.recordId).subscribe((res:any)=>{
         console.log(res,'vmdsk')
-        this.createRiskForm.patchValue(res);
+        // this.createRiskForm.patchValue(res);
+       
+        this.hazards = res.hazards
+        this.risks =res.risks
+        this.barriers = res.barriers
         
+
+        this.createRiskForm.controls['risk_category'].setValue(res.risk_category)
+        this.createRiskForm.controls['mitigation_status'].setValue(res.mitigation_status)
+        this.createRiskForm.controls['pre_mitigation_risk_score'].setValue(res.pre_mitigation_risk_score)
+        this.createRiskForm.controls['post_mitigation_risk_score'].setValue(res.post_mitigation_risk_score) 
+        console.log(this.createRiskForm.valid)
+        
+       
+
+       
       })
   }
+}
+
+
+
+onBlur(event: FocusEvent) {
+ 
 }
   closeDialog(): void{
     this.dialogRef.close();
@@ -270,11 +289,15 @@ export class CreateRiskComponent implements OnInit{
   
   submitForm(): void {
 
+   
+
     const formData = this.createRiskForm.value;
     console.log(formData);
-    if(this.createRiskForm.valid){
+    if(this.createRiskForm.invalid){
       if(this.isEditMode){
+
         console.log(formData.barriers,formData.risks,formData.hazards);
+        console.log('this is record id',this.recordId)
         this.GetDataService.updateRisk(this.recordId,formData).subscribe((res)=>{
           console.log('data updated successfully')
           this.GetDataService.getAllRisks().subscribe((res)=>{
@@ -306,6 +329,7 @@ export class CreateRiskComponent implements OnInit{
         console.log(err)
       })
     }
+
    console.log(this.createRiskForm.value, "REEEE");
     this.dialogRef.close(this.createRiskForm.value);
     // this.closeDialog()

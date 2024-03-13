@@ -30,8 +30,9 @@
             </mat-chip-row>
        
         <input matInput type="text" placeholder="Enter your Hazards" #hazardInput formControlName="hazards"
+        [formControl]="hazardCtrl"
 
-          [matChipInputFor]="chipGridHazard" [matAutocomplete]="auto"
+          [matChipInputFor]="chipGridHazard" 
 
           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
           (matChipInputTokenEnd)="addHazard($event)"required/>
@@ -65,14 +66,10 @@
 
         </mat-chip-grid>
         <input matInput type="text" placeholder="Enter your Risks" #riskInput formControlName="risks"
-          [matChipInputFor]="chipGridRisk" [matAutocomplete]="auto"
+          [matChipInputFor]="chipGridRisk" 
           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
           (matChipInputTokenEnd)="addRisk($event)"required/>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedRisk($event)">
-            <ng-container *ngFor="let risk of filteredRisks | async; trackBy: trackByFn">
-            <mat-option [value]="risk">{{risk}}</mat-option>
-          </ng-container>
-        </mat-autocomplete>
+        
 
         <mat-error *ngIf="createRiskForm.get('risks')?.touched && createRiskForm.get('risks')?.invalid" >Please Enter valid risk category</mat-error>
       </mat-form-field>
@@ -140,15 +137,11 @@
         </mat-chip-grid>
 
         <input matInput type="text" placeholder="Enter your Barriers" #hazardInput formControlName="barriers"
-          [matChipInputFor]="chipGridBarrier" [matAutocomplete]="auto"
+          [matChipInputFor]="chipGridBarrier" 
 
           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
           (matChipInputTokenEnd)="addBarrier($event)"required/>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedBarrier($event)">
-            <ng-container *ngFor="let barrier of filteredBarriers | async; trackBy: trackByFn">
-            <mat-option [value]="barrier">{{barrier}}</mat-option>
-          </ng-container>
-        </mat-autocomplete>
+    
 
         <mat-error *ngIf="createRiskForm.get('barriers')?.touched && createRiskForm.get('barriers')?.invalid" >Please Enter valid barriers</mat-error>
         </mat-form-field>
@@ -158,7 +151,8 @@
     <div mat-dialog-actions class="custom-dialog">
    
         <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
-        <button mat-raised-button color="primary" (click)="submitForm()" [disabled]="!createRiskForm.valid">{{isEditMode?'Edit':'Create'}}</button>
+        <button mat-raised-button class="submit-btn"  (click)="submitForm()"  [disabled]="!createRiskForm.valid"
+        >{{isEditMode?'Update':'Create'}}</button>
     </div>
    
    
