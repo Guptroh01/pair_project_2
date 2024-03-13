@@ -22,6 +22,9 @@
 .custom-dialog{
     position: relative;
     display: flex;
-   
+    justify-content: flex-end;
+   gap: .5em;
+   align-items: center;
+   margin-bottom: 15px;
 }
  

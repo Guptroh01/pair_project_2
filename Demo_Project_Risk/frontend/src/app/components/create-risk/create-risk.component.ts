@@ -100,7 +100,9 @@ export class CreateRiskComponent implements OnInit{
 
     if (value) {
       this.risks.push(value);
+
       this.createRiskForm.get('risks')?.setValue(this.risks);
+
       }
 
     event.chipInput!.clear();
@@ -112,7 +114,9 @@ export class CreateRiskComponent implements OnInit{
 
     if (value) {
       this.barriers.push(value);
+
       this.createRiskForm.get('barriers')?.setValue(this.barriers);
+
       }
 
     event.chipInput!.clear();
@@ -152,14 +156,18 @@ export class CreateRiskComponent implements OnInit{
 
   selectedRisk(event: MatAutocompleteSelectedEvent): void {
     this.risks.push(event.option.viewValue);
+
     this.createRiskForm.get('risks')?.setValue(this.risks);
+
     this.riskInput.nativeElement.value = '';
     this.riskCtrl.setValue(null);
   }
 
   selectedBarrier(event: MatAutocompleteSelectedEvent): void {
     this.barriers.push(event.option.viewValue);
+
     this.createRiskForm.get('barriers')?.setValue(this.barriers);
+
     this.barrierInput.nativeElement.value = '';
     this.barrierCtrl.setValue(null);
   }
@@ -211,7 +219,9 @@ export class CreateRiskComponent implements OnInit{
             startWith(null),
             map((barrier: string | null) => (barrier ? this._filterBarrier(barrier): this.allBarriers.slice())),
           )
-            }
+
+     }
+
 
   ngOnInit(): void {
     this.recordId = this.GetDataService.risk_id;
