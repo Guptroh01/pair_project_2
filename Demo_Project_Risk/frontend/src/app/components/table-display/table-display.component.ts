@@ -95,29 +95,24 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
    
 
 
-    this.displayTable()
-
-
-    
+    this.displayTable()   
 
   }
 
   displayedColumns: string[] = ['risk_id', 'risk_category', 'hazards', 'risks', 'mitigation_status', 'pre_mitigation_risk_score', 'post_mitigation_risk_score', 'barriers', 'update'];
   
   editRisk(){
+    //edit risk
     this.GetDataService.editData = true;
     
     const dialogRef = this.dialog.open(CreateRiskComponent, {
       width: '500px'
     });
 
-    
-
-    // this.displayTable()
-    
   }
 
   deleteRisk(){
+    //delete risk
     this.riskId = this.GetDataService.risk_id
     
     console.log("Delete was clicked!",this.riskId)

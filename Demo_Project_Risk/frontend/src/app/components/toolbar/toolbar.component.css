@@ -12,3 +12,19 @@
 .custom-toolbar {
   background-color:   #FAFAFA
 }
+
+.toolbar-title{
+  display: flex;
+  align-items: center;
+
+}
+
+.toolbar-title p{
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.toolbar-title mat-icon{
+  font-size: 16px;
+}

@@ -41,7 +41,7 @@ export class BubblePaginationDirective implements AfterViewInit, OnChanges {
     @Host() @Self() @Optional() private readonly matPag: MatPaginator,
     private elementRef: ElementRef,
     private ren: Renderer2
-  ) {}
+  ) { }
 
   ngAfterViewInit(): void {
     this.styleDefaultPagination();
@@ -51,6 +51,10 @@ export class BubblePaginationDirective implements AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes?.['appCustomLength']?.firstChange) {
+      const totalItems = this.appCustomLength;
+      const itemsPerPage = this.matPag.pageSize;
+      const totalPages = Math.ceil(totalItems/itemsPerPage);
+      
       this.removeButtons();
       this.switchPage(0);
       this.renderButtons();

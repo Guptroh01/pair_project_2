@@ -66,7 +66,8 @@ interface Mitigation_Status {
     MatIconModule,
     CommonModule,
     MatChipsModule,
-    MatAutocompleteModule,
+    MatAutocompleteModule,    
+   
   ],
 
   templateUrl: './create-risk.component.html',
@@ -90,10 +91,13 @@ export class CreateRiskComponent implements OnInit {
   hazards: string[] = [];
   allHazards: string[] = [];
 
+
   riskCtrl = new FormControl('', Validators.pattern('[a-zA-Z ]*'));
+
   filteredRisks: Observable<string[]>;
   risks: string[] = [];
   allRisks: string[] = [];
+
 
   barrierCtrl = new FormControl('', Validators.pattern('[a-zA-Z ]*'));
   filteredBarriers: Observable<string[]>;
@@ -116,6 +120,7 @@ export class CreateRiskComponent implements OnInit {
 
     event.chipInput!.clear();
     this.hazardCtrl.setValue(null);
+   
   }
 
   addRisk(event: MatChipInputEvent): void {
@@ -129,6 +134,7 @@ export class CreateRiskComponent implements OnInit {
 
     event.chipInput!.clear();
     this.riskCtrl.setValue(null);
+   
   }
 
   addBarrier(event: MatChipInputEvent): void {
@@ -270,6 +276,7 @@ export class CreateRiskComponent implements OnInit {
     this.isEditMode = false;
     this.GetDataService.editData = false;
   }
+
   initialiseForm(): void {
     this.createRiskForm = new FormGroup({
       risk_category: new FormControl('', [
@@ -303,8 +310,7 @@ export class CreateRiskComponent implements OnInit {
         this.hazards = res.hazards
         this.risks =res.risks
         this.barriers = res.barriers
-       
- 
+        
         this.createRiskForm.controls['risk_category'].setValue(res.risk_category)
         this.createRiskForm.controls['mitigation_status'].setValue(res.mitigation_status)
         this.createRiskForm.controls['pre_mitigation_risk_score'].setValue(res.pre_mitigation_risk_score)
@@ -312,7 +318,7 @@ export class CreateRiskComponent implements OnInit {
         this.createRiskForm.controls['hazards'].setValue(this.hazards)
         this.createRiskForm.controls['barriers'].setValue(this.barriers)
         this.createRiskForm.controls['risks'].setValue(this.risks)
-        // console.log(this.createRiskForm.valid)
+        
       });
     }
   }
