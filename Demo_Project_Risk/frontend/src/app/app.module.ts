@@ -11,9 +11,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
 import { MatIcon } from '@angular/material/icon';
 import { BubblePaginationDirective } from './directives/bubble-pagination.directive';
+import { DeleteAlertComponent } from './components/delete-alert/delete-alert.component';
 
 @NgModule({
-  declarations: [AppComponent, TableDisplayComponent],
+  declarations: [AppComponent, TableDisplayComponent, DeleteAlertComponent],
   imports: [
     ToolbarComponent,
     BrowserModule,

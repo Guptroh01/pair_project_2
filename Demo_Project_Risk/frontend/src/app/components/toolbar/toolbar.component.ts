@@ -30,6 +30,9 @@ export class ToolbarComponent {
   });
 
   dialogRef.afterClosed().subscribe(result => {
+    if(result){
+      alert('Risk created successfully');
+    }
     console.log(result,"toolbar data")
   })
   }
