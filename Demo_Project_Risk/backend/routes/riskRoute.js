@@ -9,5 +9,4 @@ router.post('/', RiskController.createRisk);
 router.put('/:id', RiskController.updateRisk);
 router.delete('/:id', RiskController.deleteRisk);
 
-
 module.exports = router;

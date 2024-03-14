@@ -131,8 +131,6 @@ export class BubblePaginationDirective implements AfterViewInit, OnChanges {
       'button.mat-mdc-paginator-navigation-next'
     );
 
-    // remove 'items per page'
-    // this.ren.setStyle(itemsPerPage, 'display', 'none');
 
     // style text of how many elements are currently displayed
     this.ren.setStyle(howManyDisplayedEl, 'position', 'absolute');
