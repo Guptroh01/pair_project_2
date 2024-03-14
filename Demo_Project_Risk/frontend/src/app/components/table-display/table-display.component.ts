@@ -19,6 +19,7 @@ import { MatChipInput } from '@angular/material/chips';
 import { CreateRiskComponent } from '../create-risk/create-risk.component';
 import {DisplayDataService} from '../../services/display-data.service'
 import { MatTable } from '@angular/material/table';
+import { DeleteAlertComponent } from '../delete-alert/delete-alert.component';
 
 
 @Component({
@@ -114,13 +115,27 @@ export class TableDisplayComponent implements OnInit, AfterViewInit {
   deleteRisk(){
     //delete risk
     this.riskId = this.GetDataService.risk_id
-    
-    console.log("Delete was clicked!",this.riskId)
-    this.GetDataService.deleteRisk(this.riskId).subscribe(()=>{
-      console.log(`risk with ${this.riskId} deleted successfully`);
-      this.displayTable()
 
+    let deleteConfirm = this.dialog.open(DeleteAlertComponent, {
+      width: '400px',
+    });
+    
+    deleteConfirm.afterClosed().subscribe((res)=>{
+      if(res){
+
+        this.GetDataService.deleteRisk(this.riskId).subscribe(()=>{
+          console.log(`risk with ${this.riskId} deleted successfully`);
+          this.displayTable()
+    
+        })
+
+      }
+
+      
     })
+
+    console.log("Delete was clicked!",this.riskId)
+  
 
   }
 

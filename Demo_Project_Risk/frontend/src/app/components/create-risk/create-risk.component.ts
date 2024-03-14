@@ -319,6 +319,7 @@ export class CreateRiskComponent implements OnInit {
         this.createRiskForm.controls['barriers'].setValue(this.barriers)
         this.createRiskForm.controls['risks'].setValue(this.risks)
         
+        console.log(this.createRiskForm.valid,"dsahshdq")
       });
     }
   }
@@ -341,15 +342,28 @@ export class CreateRiskComponent implements OnInit {
             this.GetDataService.getAllRisks().subscribe((res) => {
               this.DisplayDataService.updateTableData(res);
 
-              // console.log('res in update ', res);
+              
+
+              console.log('res in update ', res);
+              
             });
+
+            
+
+         
+
           },
           (err) => {
             console.log(err);
           }
         );
 
+        alert(`Data Updated with risk id ${this.recordId}`)
+
+       
+
         this.dialogRef.close(this.closeDialog);
+        
       } else {
         // create new risk
 
@@ -369,6 +383,7 @@ export class CreateRiskComponent implements OnInit {
       }
       console.log(this.createRiskForm.value, 'REEEE');
       this.dialogRef.close(this.createRiskForm.value);
+      
       // this.closeDialog()
     }
   }
