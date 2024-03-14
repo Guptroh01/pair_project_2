@@ -24,7 +24,6 @@ export class ToolbarComponent {
 
 
   openCreateRiskDialog(): void {
-  // console.log("Create Risk Called");
   const dialogRef = this.dialog.open(CreateRiskComponent, {
     width: '500px'
   });
