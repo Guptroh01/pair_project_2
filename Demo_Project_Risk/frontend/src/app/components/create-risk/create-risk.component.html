@@ -42,6 +42,7 @@
       >
         <mat-label>Hazards</mat-label>
         <mat-chip-grid #chipGridHazard aria-label="hazard-selection">
+
           <mat-chip-row
             *ngFor="let hazard of hazards"
             (removed)="removeHazard(hazard)"
@@ -51,6 +52,7 @@
               <mat-icon>cancel</mat-icon>
             </button>
           </mat-chip-row>
+
 
           <input
             matInput
@@ -109,6 +111,7 @@
             </button>
           </mat-chip-row>
         </mat-chip-grid>
+
         <input
           matInput
           type="text"
@@ -262,6 +265,7 @@
           </ng-container>
         </mat-autocomplete>
 
+
         <mat-error
           *ngIf="
             createRiskForm.get('barriers')?.touched &&
@@ -273,19 +277,13 @@
 
       <br />
 
-      <div mat-dialog-actions class="custom-dialog">
-        <button mat-raised-button color="warn" (click)="closeDialog()">
-          Cancel
-        </button>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="submitForm()"
-          [disabled]="!createRiskForm.valid"
-        >
-          {{ isEditMode ? "Edit" : "Create" }}
-        </button>
-      </div>
-    </form>
-  </div>
+    <div mat-dialog-actions class="custom-dialog">
+   
+        <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
+        <button mat-raised-button class="submit-btn"  (click)="submitForm()"  [disabled]="!createRiskForm.valid"
+        >{{isEditMode?'Update':'Create'}}</button>
+    </div>
+   
+   
+</form>
 </div>
