@@ -9,6 +9,8 @@
   flex: auto;
 }
 
+
+
 .custom-toolbar {
   background-color:   #FAFAFA
 }
@@ -28,3 +30,4 @@
 .toolbar-title mat-icon{
   font-size: 16px;
 }
+
