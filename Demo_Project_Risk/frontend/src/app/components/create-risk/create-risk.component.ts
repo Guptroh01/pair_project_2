@@ -85,17 +85,17 @@ export class CreateRiskComponent implements OnInit {
   // new MatChips for Hazards Array
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  hazardCtrl = new FormControl('');
+  hazardCtrl = new FormControl('', Validators.pattern('[a-zA-Z ]*'));
   filteredHazards: Observable<string[]>;
   hazards: string[] = [];
   allHazards: string[] = [];
 
-  riskCtrl = new FormControl('');
+  riskCtrl = new FormControl('', Validators.pattern('[a-zA-Z ]*'));
   filteredRisks: Observable<string[]>;
   risks: string[] = [];
   allRisks: string[] = [];
 
-  barrierCtrl = new FormControl('');
+  barrierCtrl = new FormControl('', Validators.pattern('[a-zA-Z ]*'));
   filteredBarriers: Observable<string[]>;
   barriers: string[] = [];
   allBarriers: string[] = [];
@@ -109,7 +109,7 @@ export class CreateRiskComponent implements OnInit {
   addHazard(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    if (value) {
+    if (/^[a-zA-Z \s]*$/.test(value)) {
       this.hazards.push(value);
       this.createRiskForm.get('hazards')?.setValue(this.hazards);
     }
@@ -121,7 +121,7 @@ export class CreateRiskComponent implements OnInit {
   addRisk(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    if (value) {
+    if (/^[a-zA-Z \s]*$/.test(value)) {
       this.risks.push(value);
 
       this.createRiskForm.get('risks')?.setValue(this.risks);
@@ -134,7 +134,7 @@ export class CreateRiskComponent implements OnInit {
   addBarrier(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    if (value) {
+    if (/^[a-zA-Z \s]*$/.test(value)) {
       this.barriers.push(value);
 
       this.createRiskForm.get('barriers')?.setValue(this.barriers);
@@ -251,7 +251,7 @@ export class CreateRiskComponent implements OnInit {
         map((barrier: string | null) =>
           barrier ? this._filterBarrier(barrier) : this.allBarriers.slice()
         )
-      ));
+      ))
   }
 
   ngOnInit(): void {
@@ -273,7 +273,7 @@ export class CreateRiskComponent implements OnInit {
     this.createRiskForm = new FormGroup({
       risk_category: new FormControl('', [
         Validators.required,
-        Validators.pattern(/^[a-zA-Z ]+$/),
+        Validators.pattern(/^[a-zA-Z0-9 ]+$/),
       ]),
       hazards: new FormControl('', [
         Validators.required,
