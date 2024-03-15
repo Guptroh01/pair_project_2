@@ -116,6 +116,7 @@
  
 }
 
+
 .mat-mdc-cell {
   margin-left: 0;
   overflow-wrap: break-word;
@@ -198,7 +199,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 0px;
+    border: 2px solid #E2EBE7;
+    border-top: 1px solid #E2EBE7;
   }
 
   .mdc-text-field--outlined {
